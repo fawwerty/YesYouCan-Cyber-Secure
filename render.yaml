@@ -1,0 +1,46 @@
+services:
+  # 🌐 YesYouCan MIS Backend
+  - type: web
+    name: yyc-backend
+    env: node
+    rootDir: backend
+    plan: free # Change to a paid plan for higher performance
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false # Requires manual entry in Render Dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://your-frontend-domain.vercel.app # Update after Vercel deploy
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: yyc-cache
+          property: connectionString
+
+  # 🤖 YesYouCan AI Engine
+  - type: web
+    name: yyc-ai
+    env: python
+    rootDir: ai-service
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    envVars:
+      - key: PORT
+        value: 8000
+
+# 🧠 YesYouCan Redis Cache
+databases:
+  - type: redis
+    name: yyc-cache
+    plan: free
+    ipAllowList: [] # Only allow internal Render services
