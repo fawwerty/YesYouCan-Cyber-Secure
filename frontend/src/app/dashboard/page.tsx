@@ -55,7 +55,6 @@ export default function DashboardPage() {
       <SectionHeader
         title={`Good ${new Date().getHours() < 12 ? "morning" : "afternoon"}, ${user?.firstName}`}
         subtitle="Here's your integrated GRC & Sustainability overview"
-        className="font-display italic"
         action={
           <button onClick={handleRefresh} disabled={refreshing}
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all"
