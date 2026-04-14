@@ -17,6 +17,11 @@ const stagger = { animate: { transition: { staggerChildren: 0.08 } } };
 
 export default function LandingPage() {
   const { theme, toggleTheme } = useThemeStore();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div style={{ minHeight: "100vh", color: "var(--text-primary)", overflowX: "hidden", position: "relative", fontFamily: "var(--font-body)" }}>
@@ -52,10 +57,11 @@ export default function LandingPage() {
           <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
             <button 
               onClick={toggleTheme}
-              style={{ background: "none", border: "none", color: "#fff", cursor: "pointer", opacity: 0.7 }}
+              style={{ background: "none", border: "none", color: "#fff", cursor: "pointer", opacity: 0.7, minWidth: "24px", minHeight: "24px", display: "flex", alignItems: "center", justifyContent: "center" }}
               className="hover:opacity-100 transition-opacity"
+              aria-label="Toggle Theme"
             >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              {!mounted ? null : (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />)}
             </button>
             <Link href="/auth/login" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "13px", color: "#fff", opacity: 0.8, textDecoration: "none" }}
               className="hover:opacity-100 transition-opacity">Sign In</Link>
@@ -85,7 +91,7 @@ export default function LandingPage() {
               className="text-depth-hero"
               style={{ fontSize: "clamp(3.5rem, 8vw, 6.5rem)", maxWidth: "1000px", marginBottom: "32px", color: "#ffffff" }}
             >
-              The Science of Sustain and Secure.
+              The Science of Sustainance and Security.
             </motion.h1>
             <motion.p 
               variants={fadeIn} 
