@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Shield, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, Shield } from "lucide-react";
 import useAuthStore from "@/store/authStore";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -36,84 +36,106 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black py-12">
-      {/* Premium Background Image */}
+      {/* Professional Background */}
       <div className="absolute inset-0 z-0">
-        <Image 
-          src="/assets/auth-bg.png" 
-          alt="Background" 
-          fill 
-          className="object-cover opacity-40 grayscale-[0.2]"
+        <Image
+          src="/assets/site-bg.png"
+          alt="Background"
+          fill
+          className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black" />
+        <div className="absolute inset-0 bg-black/75" />
       </div>
 
-      <div className="w-full max-w-[480px] px-6 relative z-10">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 mb-5">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-accent-green">
-              <Shield size={20} className="text-black" />
+      <div className="w-full max-w-[440px] px-6 relative z-10">
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-7"
+        >
+          <div className="inline-flex items-center gap-2.5 mb-5">
+            <div className="w-9 h-9 rounded-md flex items-center justify-center iridescent-bg">
+              <Shield size={17} className="text-black" />
             </div>
             <div>
-              <div className="font-display font-bold text-lg text-white leading-none">YesYouCan</div>
-              <div className="font-mono text-[10px] text-accent-green tracking-widest mt-0.5 uppercase">CYBER SECURE</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", color: "#fff", lineHeight: 1 }}>YesYouCan</div>
+              <div style={{ fontFamily: "monospace", fontSize: "9px", color: "var(--accent-green)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase" }}>Cyber Secure</div>
             </div>
           </div>
-          <h1 className="font-display font-bold text-4xl text-white mb-2 italic">Create workspace</h1>
-          <p className="text-sm font-body text-text-secondary">
-            Set up your organization&apos;s GRC & ESG platform
+          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "22px", color: "#fff", marginBottom: "6px", letterSpacing: "-0.01em" }}>
+            Create your organization
+          </h1>
+          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.45)" }}>
+            Set up your GRC & ESG workspace
           </p>
         </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ delay: 0.1 }}
-          className="glass-card rounded-2xl p-8 border-surface-border"
+        {/* Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.08 }}
+          className="glass-vibrant rounded-xl p-7"
         >
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-[10px] font-mono mb-2 text-text-muted uppercase tracking-widest">
-                ORGANIZATION NAME
+              <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
+                Organization Name
               </label>
               <input type="text" value={form.organizationName} onChange={update("organizationName")}
-                className="input-field bg-black/40 border-surface-border text-sm" placeholder="Acme Corporation" required />
+                className="input-field" placeholder="Acme Corporation" required />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-[10px] font-mono mb-2 text-text-muted uppercase tracking-widest">FIRST NAME</label>
+                <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
+                  First Name
+                </label>
                 <input type="text" value={form.firstName} onChange={update("firstName")}
-                  className="input-field bg-black/40 border-surface-border text-sm" placeholder="John" required />
+                  className="input-field" placeholder="John" required />
               </div>
               <div>
-                <label className="block text-[10px] font-mono mb-2 text-text-muted uppercase tracking-widest">LAST NAME</label>
+                <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
+                  Last Name
+                </label>
                 <input type="text" value={form.lastName} onChange={update("lastName")}
-                  className="input-field bg-black/40 border-surface-border text-sm" placeholder="Doe" required />
+                  className="input-field" placeholder="Doe" required />
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-mono mb-2 text-text-muted uppercase tracking-widest">EMAIL ADDRESS</label>
+              <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
+                Email Address
+              </label>
               <input type="email" value={form.email} onChange={update("email")}
-                className="input-field bg-black/40 border-surface-border text-sm" placeholder="you@company.com" required />
+                className="input-field" placeholder="you@company.com" required />
             </div>
 
             <div>
-              <label className="block text-[10px] font-mono mb-2 text-text-muted uppercase tracking-widest">PASSWORD</label>
+              <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
+                Password
+              </label>
               <div className="relative">
                 <input type={showPw ? "text" : "password"} value={form.password} onChange={update("password")}
-                  className="input-field bg-black/40 border-surface-border pr-11 text-sm" placeholder="Min. 8 characters" required minLength={8} />
+                  className="input-field pr-10" placeholder="Min. 8 characters" required minLength={8} />
                 <button type="button" onClick={() => setShowPw(!showPw)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted">
-                  {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
+                  style={{ color: "rgba(255,255,255,0.35)" }}>
+                  {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
             </div>
 
-            <motion.button type="submit" disabled={isLoading}
-              whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}
-              className="w-full py-4 rounded-xl font-display font-bold text-sm flex items-center justify-center gap-2 mt-2 bg-accent-green text-black hover:opacity-90 shadow-[0_0_30px_-5px_rgba(16,185,129,0.3)] transition-all duration-300">
+            <motion.button
+              type="submit"
+              disabled={isLoading}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className="w-full py-3 rounded-lg btn-vibrant flex items-center justify-center gap-2 mt-1"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "13px" }}
+            >
               {isLoading ? (
                 <><div className="w-4 h-4 border-2 rounded-full animate-spin border-black/40 border-t-black" /> Creating workspace…</>
               ) : (
@@ -123,9 +145,9 @@ export default function RegisterPage() {
           </form>
         </motion.div>
 
-        <p className="text-center mt-8 text-xs text-text-muted font-body">
+        <p className="text-center mt-5" style={{ fontSize: "12px", color: "rgba(255,255,255,0.35)" }}>
           Already have an account?{" "}
-          <Link href="/auth/login" className="text-accent-green hover:underline font-bold">
+          <Link href="/auth/login" style={{ color: "var(--accent-green)", fontWeight: 600 }} className="hover:underline">
             Sign in
           </Link>
         </p>

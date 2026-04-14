@@ -22,64 +22,66 @@ export default function LoginPage() {
       toast.success("Welcome back");
       router.push("/dashboard");
     } catch (err: any) {
-      toast.error(err?.response?.data?.message || "");
+      toast.error(err?.response?.data?.message || "Login failed. Please check your credentials.");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-      {/* Premium Background Image */}
+      {/* Professional Background */}
       <div className="absolute inset-0 z-0">
-        <Image 
-          src="/assets/auth-bg.png" 
-          alt="Background" 
-          fill 
-          className="object-cover opacity-40 grayscale-[0.2]"
+        <Image
+          src="/assets/site-bg.png"
+          alt="Background"
+          fill
+          className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black" />
+        <div className="absolute inset-0 bg-black/75" />
       </div>
 
-      <div className="w-full max-w-[440px] px-6 relative z-10">
+      <div className="w-full max-w-[400px] px-6 relative z-10">
         {/* Logo */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-10"
+          transition={{ duration: 0.4 }}
+          className="text-center mb-8"
         >
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-accent-green">
-              <Shield size={20} className="text-black" />
+          <div className="inline-flex items-center gap-2.5 mb-5">
+            <div className="w-9 h-9 rounded-md flex items-center justify-center iridescent-bg">
+              <Shield size={17} className="text-black" />
             </div>
             <div className="text-left">
-              <div className="font-display font-bold text-lg text-white leading-none">YesYouCan</div>
-              <div className="font-mono text-[10px] text-accent-green tracking-widest mt-0.5 uppercase">CYBER SECURE</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", color: "#fff", lineHeight: 1 }}>YesYouCan</div>
+              <div style={{ fontFamily: "monospace", fontSize: "9px", color: "var(--accent-green)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase" }}>Cyber Secure</div>
             </div>
           </div>
-          <h1 className="font-display font-bold text-4xl text-white mb-2 italic">Welcome back</h1>
-          <p className="text-sm font-body text-text-secondary">
-            Sign in to your GRC & ESG platform
+          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "22px", color: "#fff", marginBottom: "6px", letterSpacing: "-0.01em" }}>
+            Sign in to your account
+          </h1>
+          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
+            GRC & ESG intelligence platform
           </p>
         </motion.div>
 
         {/* Card */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="glass-card rounded-2xl p-8 border-surface-border"
+          transition={{ duration: 0.4, delay: 0.08 }}
+          className="glass-vibrant rounded-xl p-7"
         >
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-[10px] font-mono mb-2 text-text-muted uppercase tracking-widest">
-                EMAIL ADDRESS
+              <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
+                Email Address
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input-field bg-black/40 border-surface-border text-sm"
+                className="input-field"
                 placeholder="you@company.com"
                 required
                 autoComplete="email"
@@ -87,15 +89,15 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="block text-[10px] font-mono mb-2 text-text-muted uppercase tracking-widest">
-                PASSWORD
+              <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
+                Password
               </label>
               <div className="relative">
                 <input
                   type={showPw ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="input-field bg-black/40 border-surface-border pr-11 text-sm"
+                  className="input-field pr-10"
                   placeholder="••••••••"
                   required
                   autoComplete="current-password"
@@ -103,9 +105,10 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPw(!showPw)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
+                  style={{ color: "rgba(255,255,255,0.35)" }}
                 >
-                  {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
             </div>
@@ -115,7 +118,8 @@ export default function LoginPage() {
               disabled={isLoading}
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
-              className="w-full py-4 rounded-xl font-display font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 mt-2 bg-accent-green text-black hover:opacity-90 shadow-[0_0_30px_-5px_rgba(16,185,129,0.3)]"
+              className="w-full py-3 rounded-lg btn-vibrant flex items-center justify-center gap-2 mt-1"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "13px" }}
             >
               {isLoading ? (
                 <>
@@ -124,7 +128,7 @@ export default function LoginPage() {
                 </>
               ) : (
                 <>
-                  <Lock size={15} />
+                  <Lock size={14} />
                   Authorize Access
                 </>
               )}
@@ -135,11 +139,12 @@ export default function LoginPage() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-center mt-8 text-xs text-text-muted font-body"
+          transition={{ delay: 0.3 }}
+          className="text-center mt-6"
+          style={{ fontSize: "12px", color: "rgba(255,255,255,0.35)" }}
         >
-          Don&apos;t have an account?{" "}
-          <Link href="/auth/register" className="text-accent-green hover:underline font-bold">
+          No account?{" "}
+          <Link href="/auth/register" style={{ color: "var(--accent-green)", fontWeight: 600 }} className="hover:underline">
             Register your organization
           </Link>
         </motion.p>

@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { Syne, JetBrains_Mono } from "next/font/google";
+import { Outfit, Inter } from "next/font/google";
 import "../styles/globals.css";
 import { Toaster } from "react-hot-toast";
 
-const syne = Syne({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-display",
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-jetbrains",
-  weight: ["300", "400", "500"],
+  variable: "--font-body",
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,21 +25,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${syne.variable} ${jetbrainsMono.variable} dark`}>
-      <body className="noise-overlay">
+    <html lang="en" className={`${outfit.variable} ${inter.variable} dark`}>
+      <body>
         {children}
         <Toaster
           position="top-right"
           toastOptions={{
             style: {
-              background: "#1e2a40",
+              background: "#0a0a0a",
               color: "#F0F4FF",
-              border: "1px solid #2a3a54",
+              border: "1px solid rgba(255,255,255,0.08)",
               fontFamily: "var(--font-body)",
               fontSize: "14px",
+              borderRadius: "8px",
             },
-            success: { iconTheme: { primary: "#00FF94", secondary: "#0A0F1E" } },
-            error: { iconTheme: { primary: "#f87171", secondary: "#0A0F1E" } },
+            success: { iconTheme: { primary: "#10b981", secondary: "#000000" } },
+            error: { iconTheme: { primary: "#f87171", secondary: "#000000" } },
           }}
         />
       </body>

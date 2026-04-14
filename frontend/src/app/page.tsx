@@ -3,278 +3,222 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { 
-  Shield, Leaf, Zap, Globe, Lock, ArrowRight, 
-  ChevronRight, CheckCircle2, Award, Users, BarChart3 
+import {
+  Shield, Leaf, Zap, Globe, Lock, ArrowRight,
+  ChevronRight, CheckCircle2, Award, Users, BarChart3
 } from "lucide-react";
 
 const fadeIn = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 16 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
+  transition: { duration: 0.5 }
 };
 
 const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
+  animate: { transition: { staggerChildren: 0.08 } }
 };
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#0A0F1E] text-white selection:bg-accent-green/30 selection:text-accent-green overflow-hidden">
-      {/* Dynamic Background */}
+    <div className="min-h-screen text-white overflow-x-hidden relative" style={{ fontFamily: "var(--font-body)" }}>
+
+      {/* Full-page background */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-teal-primary/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-green/5 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4" />
-        <div className="absolute inset-0 grid-bg opacity-30" />
+        <Image
+          src="/assets/site-bg.png"
+          alt="Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
-      {/* Navigation */}
-      <nav className="fixed top-6 inset-x-0 z-50 px-6">
-        <div className="max-w-6xl mx-auto glass-vibrant rounded-2xl px-6 py-4 flex items-center justify-between">
+      {/* ── HEADER ── */}
+      <header className="fixed top-0 inset-x-0 z-50 border-b border-white/10" style={{ background: "rgba(0,0,0,0.92)", backdropFilter: "blur(12px)" }}>
+        <div className="max-w-screen-2xl mx-auto px-8 h-16 flex items-center justify-between">
+          {/* Brand */}
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center iridescent-bg">
-              <Shield size={18} className="text-[#0A0F1E]" />
+            <div className="w-8 h-8 rounded-md flex items-center justify-center iridescent-bg flex-shrink-0">
+              <Shield size={16} className="text-black" />
             </div>
-            <div className="hidden sm:block">
-              <div className="font-display font-bold text-base leading-none">YesYouCan</div>
-              <div className="font-mono text-[10px] text-accent-green tracking-widest mt-0.5 uppercase">Cyber Secure</div>
+            <div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", lineHeight: 1 }}>YesYouCan</div>
+              <div style={{ fontFamily: "monospace", fontSize: "9px", color: "var(--accent-green)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase" }}>Cyber Secure</div>
             </div>
           </div>
-          
-          <div className="hidden md:flex items-center gap-8 font-display text-sm font-medium text-text-secondary">
+
+          {/* Nav links */}
+          <nav className="hidden md:flex items-center gap-8" style={{ fontFamily: "var(--font-display)", fontSize: "13px", fontWeight: 500, color: "rgba(255,255,255,0.6)" }}>
             <Link href="#features" className="hover:text-white transition-colors">Features</Link>
             <Link href="#solutions" className="hover:text-white transition-colors">Solutions</Link>
             <Link href="#about" className="hover:text-white transition-colors">About</Link>
-          </div>
+          </nav>
 
+          {/* CTA */}
           <div className="flex items-center gap-4">
-            <Link href="/auth/login" className="text-sm font-display font-medium text-text-secondary hover:text-white transition-colors px-2">
-              Login
+            <Link href="/auth/login" style={{ fontFamily: "var(--font-display)", fontSize: "13px", fontWeight: 500, color: "rgba(255,255,255,0.6)" }} className="hover:text-white transition-colors">
+              Sign In
             </Link>
-            <Link href="/auth/register" className="btn-vibrant px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
-              Launch Platform <ChevronRight size={16} />
+            <Link href="/auth/register" className="btn-vibrant px-5 py-2 rounded-md flex items-center gap-1.5" style={{ fontFamily: "var(--font-display)", fontSize: "13px", fontWeight: 600 }}>
+              Get Started <ChevronRight size={14} />
             </Link>
           </div>
         </div>
-      </nav>
+      </header>
 
-      {/* Hero Section */}
-      <section className="relative pt-40 pb-20 px-6 z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
-            initial="initial"
-            animate="animate"
-            variants={stagger}
-            className="text-center lg:text-left"
-          >
-            <motion.div 
+      {/* ── HERO ── */}
+      <section className="relative pt-36 pb-24 px-8 z-10">
+        <div className="max-w-5xl mx-auto">
+          <motion.div initial="initial" animate="animate" variants={stagger}>
+            <motion.p
               variants={fadeIn}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-vibrant border-accent-green/20 mb-6"
+              style={{ fontFamily: "monospace", fontSize: "11px", color: "var(--accent-green)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "20px" }}
             >
-              <Zap size={14} className="text-accent-green fill-accent-green" />
-              <span className="font-mono text-[11px] font-bold text-accent-green uppercase tracking-wider">Next-Gen GRC & ESG Platform</span>
-            </motion.div>
-            
-            <motion.h1 
+              Enterprise GRC & ESG Platform
+            </motion.p>
+
+            <motion.h1
               variants={fadeIn}
-              className="font-display font-black text-5xl md:text-7xl lg:text-8xl leading-[0.9] mb-8"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(2.4rem, 5vw, 4rem)", lineHeight: 1.1, marginBottom: "20px", color: "#fff", letterSpacing: "-0.02em" }}
             >
               The Science of <span className="text-gradient-vibrant">Sustain</span> and <span className="text-gradient-vibrant">Secure</span>.
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               variants={fadeIn}
-              className="text-lg md:text-xl text-text-secondary max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
+              style={{ fontSize: "15px", color: "rgba(255,255,255,0.55)", maxWidth: "520px", lineHeight: 1.7, marginBottom: "32px" }}
             >
-              Secure your infrastructure while building a sustainable future. YesYouCan integrates Cybersecurity, ESG metrics, and AI-driven compliance into one powerful, Pro Max ecosystem.
+              Secure your infrastructure while building a sustainable future. YesYouCan integrates Cybersecurity, ESG metrics, and AI-driven compliance into one powerful ecosystem.
             </motion.p>
-            
-            <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start">
-              <Link href="/auth/register" className="btn-vibrant px-8 py-4 rounded-2xl text-base w-full sm:w-auto text-center flex items-center justify-center gap-2 group">
+
+            <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-4">
+              <Link href="/auth/register" className="btn-vibrant px-7 py-3 rounded-md flex items-center gap-2 group" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "14px" }}>
                 Start Enterprise Launch
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
               </Link>
-              <div className="flex items-center gap-4 px-6 py-4 rounded-2xl glass-vibrant border-white/5">
-                <div className="flex -space-x-3">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-[#0A0F1E] bg-surface-elevated flex items-center justify-center text-[10px] font-bold overflow-hidden">
-                      <Image src={`https://i.pravatar.cc/100?u=${i}`} alt="User" width={32} height={32} />
-                    </div>
-                  ))}
-                </div>
-                <div className="text-left">
-                  <div className="text-xs font-bold text-white">500+ Enterprises</div>
-                  <div className="text-[10px] text-text-muted">Already securing their future</div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8, x: 20 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
-          >
-            <div className="relative z-10 rounded-3xl overflow-hidden glass-vibrant border-white/10 pro-shadow">
-              <Image 
-                src="/assets/hero.png" 
-                alt="GRC Visualization" 
-                width={800} 
-                height={800} 
-                className="w-full h-auto hover:scale-105 transition-transform duration-[2s]"
-                priority
-              />
-            </div>
-            
-            {/* Floating Elements */}
-            <motion.div 
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-10 -right-10 z-20 glass-vibrant p-4 rounded-2xl border-accent-green/30"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg iridescent-bg flex items-center justify-center">
-                  <BarChart3 size={16} className="text-[#0A0F1E]" />
-                </div>
-                <div>
-                  <div className="text-[10px] text-text-secondary font-mono">LIVE COMPLIANCE</div>
-                  <div className="text-sm font-bold text-accent-green">99.8% Perfect</div>
-                </div>
-              </div>
+              <Link href="/auth/login" className="px-7 py-3 rounded-md flex items-center gap-2" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "14px", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)" }}>
+                Sign In
+              </Link>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Feature Grid Section (Mobbin Inspired) */}
-      <section id="features" className="py-32 px-6 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="font-display font-black text-4xl md:text-6xl mb-4 tracking-tight italic">Engineered for Impact.</h2>
-            <p className="text-text-secondary max-w-2xl mx-auto">Designed by experts, built with precision. Experience the intersection of intelligence and sustainability.</p>
+      {/* ── FEATURES SECTION ── */}
+      <section id="features" className="py-20 px-8 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-14">
+            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.6rem, 3vw, 2.4rem)", marginBottom: "10px", color: "#fff", letterSpacing: "-0.02em" }}>
+              Engineered for Impact.
+            </h2>
+            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "14px", maxWidth: "480px", lineHeight: 1.7 }}>
+              Designed by experts, built with precision. Experience the intersection of intelligence and sustainability.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
-            {/* Large Feature Card */}
-            <motion.div 
-              whileHover={{ y: -5 }}
-              className="md:col-span-8 glass-vibrant rounded-[2.5rem] p-10 flex flex-col justify-between group relative overflow-hidden feature-grid-item"
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5" style={{ minHeight: "420px" }}>
+            {/* Large card */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="md:col-span-8 glass-vibrant rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-teal-primary/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute top-0 right-0 w-72 h-72 bg-teal-500/5 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#00FF94]/10 border border-[#00FF94]/20 flex items-center justify-center mb-8">
-                  <Shield size={28} className="text-accent-green" />
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-5">
+                  <Shield size={20} className="text-emerald-400" />
                 </div>
-                <h3 className="font-display font-bold text-4xl text-white mb-4">Autonomous Cyber Defense</h3>
-                <p className="text-text-secondary text-lg max-w-md">Our AI doesn't just monitor; it predicts. Detect vulnerabilities before they manifest with our adaptive GRC engine.</p>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "22px", color: "#fff", marginBottom: "8px" }}>Autonomous Cyber Defense</h3>
+                <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", maxWidth: "380px", lineHeight: 1.7 }}>
+                  Our AI doesn't just monitor — it predicts. Detect vulnerabilities before they manifest with our adaptive GRC engine.
+                </p>
               </div>
-              <div className="mt-8 flex items-center gap-4">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono">
-                  <CheckCircle2 size={14} className="text-accent-green" /> ISO 27001
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono">
-                  <CheckCircle2 size={14} className="text-accent-green" /> NIST CSF
-                </div>
+              <div className="mt-6 flex items-center gap-3">
+                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "monospace", color: "rgba(255,255,255,0.6)" }}>
+                  <CheckCircle2 size={12} className="text-emerald-400" /> ISO 27001
+                </span>
+                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "monospace", color: "rgba(255,255,255,0.6)" }}>
+                  <CheckCircle2 size={12} className="text-emerald-400" /> NIST CSF
+                </span>
               </div>
             </motion.div>
 
-            {/* Small Feature Card */}
-            <motion.div 
-              whileHover={{ y: -5 }}
-              className="md:col-span-4 glass-vibrant rounded-[2.5rem] p-10 flex flex-col items-center justify-center text-center feature-grid-item iridescent-bg group cursor-pointer"
+            {/* Small card */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="md:col-span-4 iridescent-bg rounded-2xl p-8 flex flex-col items-center justify-center text-center"
             >
-              <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Leaf size={40} className="text-[#0A0F1E]" />
+              <div className="w-14 h-14 rounded-full bg-black/20 flex items-center justify-center mb-4">
+                <Leaf size={28} className="text-black" />
               </div>
-              <h3 className="font-display font-bold text-2xl text-[#0A0F1E] mb-3">Green Intelligence</h3>
-              <p className="text-[#0A0F1E]/70 text-sm">Automated Scope 1, 2, and 3 carbon reporting at your fingertips.</p>
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "18px", color: "#000", marginBottom: "6px" }}>Green Intelligence</h3>
+              <p style={{ color: "rgba(0,0,0,0.6)", fontSize: "12px", lineHeight: 1.6 }}>Automated Scope 1, 2 & 3 carbon reporting at your fingertips.</p>
             </motion.div>
 
-            {/* Bottom Row */}
-            <motion.div 
-              whileHover={{ y: -5 }}
-              className="md:col-span-4 glass-vibrant rounded-[2.5rem] p-10 feature-grid-item"
-            >
-              <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6">
-                <Globe size={24} className="text-purple-400" />
+            {/* Bottom row */}
+            <motion.div whileHover={{ y: -4 }} className="md:col-span-4 glass-vibrant rounded-2xl p-8">
+              <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-4">
+                <Globe size={20} className="text-purple-400" />
               </div>
-              <h3 className="font-display font-bold text-xl text-white mb-2">Global Governance</h3>
-              <p className="text-text-secondary text-sm">Multi-tenant, multi-region compliance management simplified.</p>
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "17px", color: "#fff", marginBottom: "6px" }}>Global Governance</h3>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px", lineHeight: 1.6 }}>Multi-tenant, multi-region compliance management simplified.</p>
             </motion.div>
 
-            <motion.div 
-              whileHover={{ y: -5 }}
-              className="md:col-span-8 glass-vibrant rounded-[2.5rem] overflow-hidden relative feature-grid-item group"
-            >
-              <Image 
-                src="/assets/features.png" 
-                alt="Data Visualization" 
-                fill
-                className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] to-transparent" />
-              <div className="absolute bottom-10 left-10">
-                <h3 className="font-display font-bold text-3xl text-white mb-2 italic">Pro Max Analytics</h3>
-                <p className="text-text-secondary text-sm max-w-sm">Every data point visualized. Every risk quantified. Real-time insights that actually lead to action.</p>
-              </div>
+            <motion.div whileHover={{ y: -4 }} className="md:col-span-8 glass-vibrant rounded-2xl p-8 flex flex-col justify-end relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/10 to-purple-900/10 pointer-events-none" />
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "17px", color: "#fff", marginBottom: "6px" }}>Pro Max Analytics</h3>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px", maxWidth: "360px", lineHeight: 1.6 }}>Every data point visualized. Every risk quantified. Real-time insights that actually lead to action.</p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Social Proof Section */}
-      <section className="py-20 px-6 border-y border-white/5 relative z-10 overflow-hidden">
-        <div className="absolute inset-0 iridescent-bg opacity-5" />
-        <div className="max-w-7xl mx-auto flex flex-col items-center gap-12 text-center relative z-20">
-          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">Trusted by innovators globally</p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-40 grayscale group hover:grayscale-0 transition-all duration-700">
-            {/* Placeholder Logos as simple text for high-end look */}
+      {/* ── SOCIAL PROOF ── */}
+      <section className="py-14 px-8 border-y border-white/5 relative z-10">
+        <div className="max-w-5xl mx-auto flex flex-col items-center gap-8 text-center">
+          <p style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Trusted by innovators globally</p>
+          <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-30 hover:opacity-60 transition-opacity duration-500">
             {["ORACLE", "VELOCITY", "STRIPE", "MERCURY", "LINEAR"].map(label => (
-              <span key={label} className="font-display font-black text-2xl md:text-3xl tracking-tighter hover:text-accent-green transition-colors cursor-default">{label}</span>
+              <span key={label} style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", letterSpacing: "-0.04em" }}>{label}</span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Impact Section */}
-      <section id="solutions" className="py-32 px-6 relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+      {/* ── CTA / IMPACT SECTION ── */}
+      <section id="solutions" className="py-20 px-8 relative z-10">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-vibrant rounded-[3rem] p-16 md:p-24 relative overflow-hidden"
+            className="glass-vibrant rounded-2xl p-12 relative overflow-hidden"
           >
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent-green/30 to-transparent" />
-            <h2 className="font-display font-black text-5xl md:text-8xl leading-tight mb-8 italic">
-              Ready to redefine <br/> 
-              <span className="text-gradient-vibrant">possibility?</span>
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+
+            <p style={{ fontFamily: "monospace", fontSize: "10px", color: "var(--accent-green)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "16px" }}>Ready to scale</p>
+            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", color: "#fff", lineHeight: 1.15, marginBottom: "14px", letterSpacing: "-0.02em" }}>
+              Ready to redefine <span className="text-gradient-vibrant">possibility?</span>
             </h2>
-            <p className="text-lg text-text-secondary mb-12 max-w-lg mx-auto leading-relaxed">
-              Join the elite league of enterprises prioritizing both cyber excellence and environmental stewardship. 
-              Built for doctors of strategy and masters of technology.
+            <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", marginBottom: "28px", maxWidth: "420px", margin: "0 auto 28px", lineHeight: 1.7 }}>
+              Join the elite league of enterprises prioritizing both cyber excellence and environmental stewardship.
             </p>
-            <Link href="/auth/register" className="btn-vibrant px-10 py-5 rounded-2xl text-lg inline-flex items-center gap-3">
-              Deploy Your Instance Now <ArrowRight size={20} />
+            <Link href="/auth/register" className="btn-vibrant px-8 py-3 rounded-md inline-flex items-center gap-2" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "14px" }}>
+              Deploy Your Instance <ArrowRight size={16} />
             </Link>
-            
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+
+            <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { label: "SOC2 Type II", icon: <Lock size={16} /> },
-                { label: "HIPAA Compliant", icon: <Shield size={16} /> },
-                { label: "ESG Gold Standard", icon: <Award size={16} /> },
-                { label: "99.99% Uptime", icon: <Zap size={16} /> },
+                { label: "SOC2 Type II", icon: <Lock size={14} /> },
+                { label: "HIPAA Compliant", icon: <Shield size={14} /> },
+                { label: "ESG Gold Standard", icon: <Award size={14} /> },
+                { label: "99.99% Uptime", icon: <Zap size={14} /> },
               ].map(badge => (
                 <div key={badge.label} className="flex flex-col items-center gap-2">
-                  <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-text-secondary">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }}>
                     {badge.icon}
                   </div>
-                  <span className="text-[10px] uppercase font-mono tracking-wider text-text-muted">{badge.label}</span>
+                  <span style={{ fontSize: "9px", textTransform: "uppercase", fontFamily: "monospace", letterSpacing: "0.1em", color: "rgba(255,255,255,0.35)" }}>{badge.label}</span>
                 </div>
               ))}
             </div>
@@ -282,57 +226,79 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer id="about" className="py-20 px-6 border-t border-white/5 bg-[#0A0F1E] relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-            <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-lg iridescent-bg flex items-center justify-center">
-                  <Shield size={16} className="text-[#0A0F1E]" />
+      {/* ── FOOTER ── */}
+      <footer id="about" className="py-16 px-8 border-t border-white/10 relative z-10" style={{ background: "rgba(0,0,0,0.92)" }}>
+        <div className="max-w-screen-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            {/* Brand */}
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-7 h-7 rounded-md iridescent-bg flex items-center justify-center">
+                  <Shield size={14} className="text-black" />
                 </div>
-                <span className="font-display font-bold text-xl">YesYouCan</span>
+                <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px" }}>YesYouCan Cyber Secure</span>
               </div>
-              <p className="text-text-secondary text-sm max-w-sm leading-relaxed mb-6">
-                Integrating governance, sustainability, and cybersecurity into a unified intelligence ecosystem. 
-                Founded by industry visionary Dr. Noah Darko-Adjei.
+              <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", maxWidth: "320px", lineHeight: 1.7, marginBottom: "16px" }}>
+                Integrating governance, sustainability, and cybersecurity into a unified intelligence ecosystem.
               </p>
-              <div className="flex gap-4">
-                {/* Social icons placeholder */}
-                <div className="w-8 h-8 rounded-lg glass-vibrant border-white/5 flex items-center justify-center hover:border-accent-green transition-colors cursor-pointer"><Globe size={14} /></div>
-                <div className="w-8 h-8 rounded-lg glass-vibrant border-white/5 flex items-center justify-center hover:border-accent-green transition-colors cursor-pointer"><Users size={14} /></div>
-                <div className="w-8 h-8 rounded-lg glass-vibrant border-white/5 flex items-center justify-center hover:border-accent-green transition-colors cursor-pointer"><Shield size={14} /></div>
+              <div className="flex gap-3">
+                <div className="w-7 h-7 rounded-md glass-vibrant flex items-center justify-center hover:border-emerald-500/40 cursor-pointer transition-colors"><Globe size={12} /></div>
+                <div className="w-7 h-7 rounded-md glass-vibrant flex items-center justify-center hover:border-emerald-500/40 cursor-pointer transition-colors"><Users size={12} /></div>
+                <div className="w-7 h-7 rounded-md glass-vibrant flex items-center justify-center hover:border-emerald-500/40 cursor-pointer transition-colors"><Shield size={12} /></div>
               </div>
             </div>
-            
+
+            {/* Platform links */}
             <div>
-              <h4 className="font-display font-bold text-sm mb-6 text-white uppercase tracking-widest">Platform</h4>
-              <ul className="space-y-4 text-text-secondary text-sm font-medium">
-                <li><Link href="#" className="hover:text-accent-green transition-colors">Infrastructure</Link></li>
-                <li><Link href="#" className="hover:text-accent-green transition-colors">ESG Reporting</Link></li>
-                <li><Link href="#" className="hover:text-accent-green transition-colors">Cyber Suite</Link></li>
-                <li><Link href="#" className="hover:text-accent-green transition-colors">AI Insights</Link></li>
+              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "rgba(255,255,255,0.5)", marginBottom: "16px" }}>Platform</h4>
+              <ul className="space-y-3">
+                {[
+                  { label: "Infrastructure", href: "/dashboard" },
+                  { label: "ESG Reporting", href: "/esg" },
+                  { label: "Cyber Suite", href: "/risks" },
+                  { label: "AI Insights", href: "/dashboard" },
+                ].map(item => (
+                  <li key={item.label}>
+                    <Link href={item.href} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", fontWeight: 500 }} className="hover:text-emerald-400 transition-colors">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
+            {/* Enterprise links */}
             <div>
-              <h4 className="font-display font-bold text-sm mb-6 text-white uppercase tracking-widest">Enterprise</h4>
-              <ul className="space-y-4 text-text-secondary text-sm font-medium">
-                <li><Link href="#" className="hover:text-accent-green transition-colors">Solutions</Link></li>
-                <li><Link href="#" className="hover:text-accent-green transition-colors">Governance</Link></li>
-                <li><Link href="#" className="hover:text-accent-green transition-colors">Sustainability</Link></li>
-                <li><Link href="#" className="hover:text-accent-green transition-colors">Security</Link></li>
+              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "rgba(255,255,255,0.5)", marginBottom: "16px" }}>Enterprise</h4>
+              <ul className="space-y-3">
+                {[
+                  { label: "Solutions", href: "#solutions" },
+                  { label: "Governance", href: "/admin" },
+                  { label: "Sustainability", href: "/esg" },
+                  { label: "Security", href: "/risks" },
+                ].map(item => (
+                  <li key={item.label}>
+                    <Link href={item.href} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", fontWeight: 500 }} className="hover:text-emerald-400 transition-colors">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
 
-          <div className="pt-12 border-t border-white/5 text-center flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="font-mono text-[10px] text-text-muted">
-              © 2025 YesYouCan Cyber Secure • Strategic Advisor: Christiana Konlan Kennedy
+          {/* Footer bottom */}
+          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.05em" }}>
+              © 2025 YesYouCan Cyber Secure. All rights reserved.
             </p>
-            <div className="flex items-center gap-8 text-[10px] font-mono text-text-muted">
-              <Link href="#" className="hover:text-white transition-colors uppercase tracking-widest">Privacy Policy</Link>
-              <Link href="#" className="hover:text-white transition-colors uppercase tracking-widest">Terms of Service</Link>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy" style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em", textTransform: "uppercase" }} className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em", textTransform: "uppercase" }} className="hover:text-white transition-colors">
+                Terms of Service
+              </Link>
             </div>
           </div>
         </div>
