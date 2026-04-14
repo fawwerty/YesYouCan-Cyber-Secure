@@ -3,6 +3,8 @@ import { Inter, DM_Mono } from "next/font/google";
 import "../styles/globals.css";
 import { Toaster } from "react-hot-toast";
 
+import ThemeRegistry from "../components/ThemeRegistry";
+
 // Inter — all weights for both display and body (Kudi-style unified font)
 const inter = Inter({
   subsets: ["latin"],
@@ -26,9 +28,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${dmMono.variable} dark`}>
+    <html lang="en" className={`${inter.variable} ${dmMono.variable}`}>
       <body style={{ fontFamily: "var(--font-display)" }}>
-        {children}
+        <ThemeRegistry>
+          {children}
+        </ThemeRegistry>
         <Toaster
           position="top-right"
           toastOptions={{

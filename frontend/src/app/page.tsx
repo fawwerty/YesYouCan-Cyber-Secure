@@ -35,9 +35,9 @@ export default function LandingPage() {
 
       {/* ── HEADER — Full width, tall, traditional, no rounded border ── */}
       <header style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
-        background: "rgba(0,0,0,0.95)",
-        borderBottom: "1px solid rgba(255,255,255,0.1)",
+        position: "absolute", top: 0, left: 0, right: 0, zIndex: 50,
+        background: "rgba(0,0,0,0.5)",
+        borderBottom: "1px solid rgba(255,255,255,0.05)",
         backdropFilter: "blur(12px)",
       }}>
         <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px", height: "68px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
