@@ -21,6 +21,10 @@ services:
           type: keyvalue
           name: yyc-cache
           property: connectionString
+      - key: FRONTEND_URL
+        value: https://yesyoucan-digital-mis-git-main-fawwertys-projects.vercel.app
+      - key: FRONTEND_URL_PROD
+        value: https://yesyoucan-digital-mis.vercel.app
 
   # 🤖 YesYouCan AI Engine
   - type: web

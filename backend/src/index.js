@@ -50,15 +50,38 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.use(compression());
 app.use(morgan("combined", { stream: { write: (msg) => logger.info(msg.trim()) } }));
 
-// CORS
+// CORS — allow Vercel deployments, localhost, and custom domains
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  process.env.FRONTEND_URL,
+  process.env.FRONTEND_URL_PROD,
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, curl, Postman)
+      if (!origin) return callback(null, true);
+      // Allow all Vercel deployment URLs for this project
+      if (
+        allowedOrigins.includes(origin) ||
+        /\.vercel\.app$/.test(origin) ||
+        origin.includes("yesyoucan")
+      ) {
+        return callback(null, true);
+      }
+      logger.warn(`CORS blocked origin: ${origin}`);
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "x-tenant-id"],
   })
 );
+
+// Handle preflight for all routes
+app.options("*", cors());
 
 // Rate limiting
 const limiter = rateLimit({
