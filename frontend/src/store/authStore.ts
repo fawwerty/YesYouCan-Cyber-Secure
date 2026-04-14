@@ -19,6 +19,9 @@ interface Tenant {
   slug: string;
   industry: string;
   settings: any;
+  subscriptionTier?: string;
+  currency?: string;
+  timezone?: string;
 }
 
 interface AuthState {
