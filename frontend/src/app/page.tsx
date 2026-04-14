@@ -16,11 +16,21 @@ export default function LandingPage() {
   return (
     <div style={{ minHeight: "100vh", color: "#fff", overflowX: "hidden", position: "relative", fontFamily: "var(--font-body)" }}>
 
-      {/* ── COLORFUL MINIMALIST BACKGROUND ── */}
+      {/* ── PREMIUM SOC HERO BACKGROUND (FULL-BLEED) ── */}
       <div style={{ position: "fixed", inset: 0, zIndex: 0 }}>
-        <Image src="/assets/site-bg.png" alt="" fill style={{ objectFit: "cover" }} priority />
-        {/* Dark overlay to ensure text readability — no words bleed through */}
-        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.78)" }} />
+        <Image 
+          src="/assets/site-bg.png" 
+          alt="Security Operations Center background" 
+          fill 
+          style={{ objectFit: "cover", opacity: 0.9 }} 
+          priority 
+        />
+        {/* Adjusted high-contrast overlay for maximum readability of white text */}
+        <div style={{ 
+          position: "absolute", 
+          inset: 0, 
+          background: "radial-gradient(circle at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.92) 100%)" 
+        }} />
       </div>
 
       {/* ── HEADER — Full width, tall, traditional, no rounded border ── */}
