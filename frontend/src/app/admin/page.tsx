@@ -1,19 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Settings, Users, Shield } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Settings, Users, Shield, X, CheckCircle2, ShieldAlert, Lock, UserPlus } from "lucide-react";
 import api from "@/lib/api";
 import { SectionHeader, KPICard, Badge } from "../../components/ui/index";
-import { formatDate, ROLE_LABELS } from "@/lib/utils";
+import { formatDate, ROLE_LABELS, cn } from "@/lib/utils";
 import useAuthStore from "@/store/authStore";
 import toast from "react-hot-toast";
-
-import api from "@/lib/api";
-import { SectionHeader, KPICard, Badge } from "../../components/ui/index";
-import { formatDate, ROLE_LABELS } from "@/lib/utils";
-import useAuthStore from "@/store/authStore";
-import toast from "react-hot-toast";
-import { X, CheckCircle2, ShieldAlert, Lock, UserPlus } from "lucide-react";
 
 export default function AdminPage() {
   const { user: currentUser, tenant } = useAuthStore();

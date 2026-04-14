@@ -1,3 +1,5 @@
+"use client";
+import { motion } from "framer-motion";
 import { FileText, Download, BarChart2, Shield, Leaf, Users, Table } from "lucide-react";
 import { SectionHeader } from "../../components/ui/index";
 import { generatePDF, generateExcel, getMockDataForReport } from "@/lib/reports";
