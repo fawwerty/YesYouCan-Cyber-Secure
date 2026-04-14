@@ -12,7 +12,7 @@ export default function SolutionsPage() {
 
       <p style={{ fontFamily: "monospace", fontSize: "11px", color: "var(--color-primary)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "16px", fontWeight: 700 }}>Enterprise · Solutions</p>
       <h1 className="text-depth-hero" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", marginBottom: "24px", color: "#fff" }}>Enterprise Solutions</h1>
-      <p className="text-depth-body" style={{ fontSize: "17px", color: "rgba(255,255,255,0.7)", lineHeight: 1.8, maxWidth: "720px", marginBottom: "56px" }}>
+      <p className="text-depth-body" style={{ fontSize: "17px", color: "var(--text-secondary)", lineHeight: 1.8, maxWidth: "720px", marginBottom: "56px" }}>
         YesYouCan delivers purpose-built solutions for organizations navigating the intersection of cybersecurity, regulatory compliance, and sustainability. From SMEs to large enterprises, our platform scales with your ambition.
       </p>
 

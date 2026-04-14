@@ -45,7 +45,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "#000", paddingTop: "48px", paddingBottom: "48px" }}>
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent", paddingTop: "48px", paddingBottom: "48px" }}>
       
       {/* Cinematic background context is now managed globally in RootLayout */}
 

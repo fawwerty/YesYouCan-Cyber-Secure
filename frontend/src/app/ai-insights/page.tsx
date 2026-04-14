@@ -12,7 +12,7 @@ export default function AIInsightsPage() {
 
       <p style={{ fontFamily: "monospace", fontSize: "11px", color: "var(--color-primary)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "16px", fontWeight: 700 }}>Platform · AI Insights</p>
       <h1 className="text-depth-hero" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", marginBottom: "24px", color: "#fff" }}>AI-Powered Intelligence</h1>
-      <p className="text-depth-body" style={{ fontSize: "17px", color: "rgba(255,255,255,0.7)", lineHeight: 1.8, maxWidth: "720px", marginBottom: "56px" }}>
+      <p className="text-depth-body" style={{ fontSize: "17px", color: "var(--text-secondary)", lineHeight: 1.8, maxWidth: "720px", marginBottom: "56px" }}>
         Our AI engine transforms raw compliance, emissions, and risk data into actionable intelligence — predicting threats, recommending controls, and surfacing patterns that human analysis alone would miss.
       </p>
 

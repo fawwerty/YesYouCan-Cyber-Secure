@@ -22,12 +22,12 @@ export default function LoginPage() {
       toast.success("Welcome back");
       router.push("/dashboard");
     } catch (err: any) {
-      toast.error(err?.response?.data?.message || "Login failed. Please check your credentials.");
+      toast.error("Login failed. Please check your credentials.");
     }
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "#000" }}>
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent" }}>
       
       {/* Cinematic background context is now managed globally in RootLayout */}
 
