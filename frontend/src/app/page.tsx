@@ -19,7 +19,7 @@ export default function LandingPage() {
       {/* ── PREMIUM SOC HERO BACKGROUND (FULL-BLEED) ── */}
       <div style={{ position: "fixed", inset: 0, zIndex: 0 }}>
         <Image 
-          src="/assets/site-bg.png" 
+          src="/assets/hero-soc-modern.png" 
           alt="Security Operations Center background" 
           fill 
           style={{ objectFit: "cover", opacity: 0.9 }} 
