@@ -105,8 +105,8 @@ function RiskModal({ risk, onClose, onSave }: { risk: any; onClose: () => void; 
               className="input-field min-h-[60px] resize-none" placeholder="Describe the mitigation plan..." />
           </div>
           <button type="submit" disabled={saving}
-            className="w-full py-3 rounded-xl font-display font-semibold text-sm transition-all"
-            style={{ background: "linear-gradient(135deg, #0D7377, #00CC77)", color: "#0A0F1E", opacity: saving ? 0.6 : 1 }}>
+            className="w-full py-3 rounded-xl font-display font-semibold text-sm transition-all btn-vibrant"
+            style={{ opacity: saving ? 0.6 : 1 }}>
             {saving ? "Saving…" : risk ? "Update Risk" : "Create Risk"}
           </button>
         </form>
@@ -176,8 +176,7 @@ export default function RisksPage() {
         subtitle={`${total} risks tracked across all categories`}
         action={
           <button onClick={() => setModal({ open: true, risk: null })}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl font-display font-semibold text-sm transition-all"
-            style={{ background: "linear-gradient(135deg,#0D7377,#00CC77)", color: "#0A0F1E" }}>
+            className="flex items-center gap-2 px-4 py-2 rounded-xl font-display font-semibold text-sm transition-all btn-vibrant">
             <Plus size={15} /> New Risk
           </button>
         }

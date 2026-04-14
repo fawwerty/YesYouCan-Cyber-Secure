@@ -37,8 +37,7 @@ export default function AuditPage() {
     <div className="p-5 md:p-7 max-w-[1400px] mx-auto">
       <SectionHeader title="Audit Management" subtitle="Plan, track, and close audits"
         action={<button onClick={()=>setShowModal(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl font-display font-semibold text-sm"
-          style={{background:"linear-gradient(135deg,#0D7377,#00CC77)",color:"#0A0F1E"}}>
+          className="flex items-center gap-2 px-4 py-2 rounded-xl font-display font-semibold text-sm btn-vibrant">
           <Plus size={15}/> New Audit</button>}/>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <KPICard label="Total Audits" value={audits.length} icon={<ClipboardList size={16}/>} color="#60a5fa"/>
@@ -143,8 +142,7 @@ export default function AuditPage() {
                 <div><label className="block font-mono text-xs mb-1.5" style={{color:"var(--text-muted)"}}>END DATE</label>
                   <input type="date" value={form.endDate} onChange={upd("endDate")} className="input-field"/></div>
               </div>
-              <button type="submit" className="w-full py-3 rounded-xl font-display font-semibold text-sm"
-                style={{background:"linear-gradient(135deg,#0D7377,#00CC77)",color:"#0A0F1E"}}>Create Audit</button>
+              <button type="submit" className="w-full py-3 rounded-xl font-display font-semibold text-sm btn-vibrant">Create Audit</button>
             </form>
           </motion.div>
         </div>

@@ -42,7 +42,7 @@ export default function EmployeesPage() {
                 {i===0?"🥇":i===1?"🥈":i===2?"🥉":`#${i+1}`}
               </div>
               <div className="w-9 h-9 rounded-xl flex items-center justify-center font-display font-bold text-sm flex-shrink-0"
-                style={{background:"linear-gradient(135deg,#0D7377,#00CC77)",color:"#0A0F1E"}}>
+                style={{ background: "var(--surface-border)", color: "var(--text-primary)" }}>
                 {emp.user?.firstName?.[0]}{emp.user?.lastName?.[0]}
               </div>
               <div className="flex-1 min-w-0">

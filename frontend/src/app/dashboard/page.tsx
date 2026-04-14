@@ -57,8 +57,8 @@ export default function DashboardPage() {
         subtitle="Here's your integrated GRC & Sustainability overview"
         action={
           <button onClick={handleRefresh} disabled={refreshing}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all"
-            style={{ background: "#090909", border: "1px solid var(--surface-border)", color: "var(--text-secondary)" }}>
+            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all surface-1 hover:surface-2"
+            style={{ color: "var(--text-secondary)" }}>
             <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
             {refreshing ? "Refreshing…" : "Refresh"}
           </button>
@@ -69,7 +69,7 @@ export default function DashboardPage() {
       <motion.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-[#090909] rounded-xl p-5 mb-6 flex items-center gap-4 border border-surface-border"
+        className="surface-1 rounded-xl p-5 mb-6 flex items-center gap-4"
       >
         <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 bg-accent-green">
           <Award size={24} className="text-black" />
@@ -245,7 +245,7 @@ export default function DashboardPage() {
                   <div key={emp._id} className="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-[var(--surface-elevated)] transition-colors">
                     <span className="font-mono text-xs w-4 flex-shrink-0" style={{ color: "var(--text-muted)" }}>#{idx + 1}</span>
                     <div className="w-7 h-7 rounded-lg flex items-center justify-center font-display font-bold text-xs flex-shrink-0"
-                      style={{ background: "linear-gradient(135deg,#0D7377,#00CC77)", color: "#0A0F1E" }}>
+                      style={{ background: "var(--surface-border)", color: "var(--text-primary)" }}>
                       {emp.user?.firstName?.[0]}{emp.user?.lastName?.[0]}
                     </div>
                     <div className="flex-1 min-w-0">

@@ -34,8 +34,7 @@ export default function SuppliersPage() {
     <div className="p-5 md:p-7 max-w-[1400px] mx-auto">
       <SectionHeader title="Supplier Sustainability" subtitle="ESG scoring and third-party risk"
         action={<button onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl font-display font-semibold text-sm"
-          style={{ background: "linear-gradient(135deg,#0D7377,#00CC77)", color: "#0A0F1E" }}>
+          className="flex items-center gap-2 px-4 py-2 rounded-xl font-display font-semibold text-sm btn-vibrant">
           <Plus size={15} /> Add Supplier</button>} />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <KPICard label="Avg ESG Score" value={avgESG} unit="/100" icon={<Truck size={16} />} color="#00FF94" />
@@ -106,8 +105,7 @@ export default function SuppliersPage() {
                     <option value="critical">Critical</option><option value="major">Major</option><option value="minor">Minor</option>
                   </select></div>
               </div>
-              <button type="submit" className="w-full py-3 rounded-xl font-display font-semibold text-sm"
-                style={{background:"linear-gradient(135deg,#0D7377,#00CC77)",color:"#0A0F1E"}}>Add Supplier</button>
+              <button type="submit" className="w-full py-3 rounded-xl font-display font-semibold text-sm btn-vibrant">Add Supplier</button>
             </form>
           </motion.div>
         </div>

@@ -92,7 +92,7 @@ export default function CompliancePage() {
                           className="font-mono text-xs px-2 py-0.5 rounded-md bg-transparent border-0 outline-none cursor-pointer"
                           style={{ color: STATUS_COLORS[ctrl.status] || "#94a3b8" }}>
                           {["compliant","partial","non_compliant","not_applicable"].map((s) => (
-                            <option key={s} value={s} style={{ background: "#1e2a40", color: "#F0F4FF" }}>{s.replace("_"," ")}</option>
+                            <option key={s} value={s} className="surface-1 text-primary">{s.replace("_"," ")}</option>
                           ))}
                         </select>
                       </div>

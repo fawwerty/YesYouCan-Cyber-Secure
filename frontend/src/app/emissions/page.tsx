@@ -61,8 +61,7 @@ export default function EmissionsPage() {
         subtitle="Track Scope 1, 2 & 3 emissions across your operations"
         action={
           <button onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl font-display font-semibold text-sm"
-            style={{ background: "linear-gradient(135deg,#0D7377,#00CC77)", color: "#0A0F1E" }}>
+            className="flex items-center gap-2 px-4 py-2 rounded-xl font-display font-semibold text-sm btn-vibrant">
             <Plus size={15} /> Log Emission
           </button>
         }
@@ -198,8 +197,7 @@ export default function EmissionsPage() {
                     className="input-field" />
                 </div>
               </div>
-              <button type="submit" className="w-full py-3 rounded-xl font-display font-semibold text-sm"
-                style={{ background: "linear-gradient(135deg,#0D7377,#00CC77)", color: "#0A0F1E" }}>
+              <button type="submit" className="w-full py-3 rounded-xl font-display font-semibold text-sm btn-vibrant">
                 Save Record
               </button>
             </form>
