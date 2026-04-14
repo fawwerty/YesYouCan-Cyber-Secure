@@ -7,9 +7,10 @@ import {
   LayoutDashboard, AlertTriangle, ShieldCheck, Leaf, BarChart3,
   Truck, ClipboardList, Zap, Users, FileText, Settings,
   Bell, ChevronLeft, ChevronRight, Shield, LogOut, Menu, X,
-  Activity, Globe
+  Activity, Globe, Sun, Moon
 } from "lucide-react";
 import useAuthStore from "../store/authStore";
+import useThemeStore from "../store/themeStore";
 import toast from "react-hot-toast";
 import { useSocket } from "../hooks/useSocket";
 import { cn, ROLE_LABELS } from "../lib/utils";
@@ -81,9 +82,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       {/* Logo */}
       <div className={cn("flex items-center gap-3 px-4 py-5 border-b", "border-[var(--surface-border)]")}
         style={{ minHeight: 72 }}>
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-          style={{ background: "linear-gradient(135deg, #0D7377, #00FF94)" }}>
-          <Shield size={16} className="text-white" />
+        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-[var(--accent-green)]">
+          <Shield size={16} className="text-black" />
         </div>
         <AnimatePresence>
           {!collapsed && (
@@ -136,7 +136,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <div className={cn("flex items-center gap-3 px-3 py-2.5 rounded-xl",
           "bg-[var(--surface-elevated)] border border-[var(--surface-border)]")}>
           <div className="w-7 h-7 rounded-lg flex-shrink-0 flex items-center justify-center font-display font-bold text-xs"
-            style={{ background: "linear-gradient(135deg, #0D7377, #00CC77)", color: "#0A0F1E" }}>
+            style={{ background: "var(--surface-border)", color: "var(--text-primary)" }}>
             {user.firstName[0]}{user.lastName[0]}
           </div>
           <AnimatePresence>
