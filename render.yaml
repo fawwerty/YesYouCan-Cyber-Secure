@@ -4,7 +4,7 @@ services:
     name: yyc-backend
     env: node
     rootDir: backend
-    plan: free # Change to a paid plan for higher performance
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     envVars:
@@ -19,10 +19,10 @@ services:
       - key: JWT_REFRESH_SECRET
         generateValue: true
       - key: FRONTEND_URL
-        value: https://your-frontend-domain.vercel.app # Update after Vercel deploy
+        value: https://your-frontend-domain.vercel.app
       - key: REDIS_URL
         fromService:
-          type: redis
+          type: keyvalue
           name: yyc-cache
           property: connectionString
 
@@ -38,9 +38,8 @@ services:
       - key: PORT
         value: 8000
 
-# 🧠 YesYouCan Redis Cache
-databases:
-  - type: redis
+  # 🧠 YesYouCan Redis Cache
+  - type: keyvalue
     name: yyc-cache
     plan: free
     ipAllowList: [] # Only allow internal Render services
