@@ -4,40 +4,18 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────────────────────── */
 :root {
-  /* Surfaces — 3 levels only, no glass overload */
-  --surface-base:     #000000;
-  --surface-1:        #0A0A0A;
-  --surface-2:        #111111;
-  --surface-border:   rgba(255, 255, 255, 0.07);
-  --surface-border-2: rgba(255, 255, 255, 0.12);
-
-  /* Backward compat aliases */
-  --navy-950:         #000000;
-  --navy-900:         #000000;
-  --surface:          #000000;
-  --surface-elevated: #0A0A0A;
-  --surface-card:     #0A0A0A;
-
-  /* Typography */
-  --text-primary:   #FFFFFF;
-  --text-secondary: #A1A1AA;
-  --text-muted:     #52525B;
-
-  /* Fonts — Inter-first, matching Kudi's clean fintech editorial style */
+  /* Common (Theme Independent) */
   --font-display: 'Inter', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
   --font-mono:    'DM Mono', 'JetBrains Mono', monospace;
 
-  /* Purpose-driven color system */
-  --color-primary:  #00FF94;   /* CTAs only */
-  --color-success:  #22c55e;   /* positive trend / pass */
-  --color-danger:   #ef4444;   /* negative trend / fail */
-  --color-warning:  #f59e0b;   /* caution / amber */
-  --color-info:     #3b82f6;   /* informational */
-  --accent-green:   #10b981;   /* brand accent — not data */
+  --color-primary:  #00FF94;   /* Brand Emerald */
+  --color-success:  #22c55e;   /* Success Emerald */
+  --color-danger:   #ef4444;   /* Negative Red */
+  --color-warning:  #f59e0b;   /* Caution Amber */
+  --color-info:     #3b82f6;   /* Info Blue */
+  --accent-green:   #10b981;
   --accent-green-dim: #059669;
-  --teal-primary:   #10b981;
-  --teal-light:     #34d399;
 
   /* Spacing rhythm */
   --space-xs: 4px;
@@ -46,6 +24,44 @@
   --space-lg: 24px;
   --space-xl: 32px;
   --space-2xl: 48px;
+
+  /* --- DARK THEME (Pure Black Architecture) --- */
+  --surface-base:     #000000;
+  --surface-1:        #080808; /* Slightly lighter for elevation */
+  --surface-2:        #121212; /* Nested content */
+  --surface-border:   rgba(255, 255, 255, 0.08);
+  --surface-border-2: rgba(255, 255, 255, 0.14);
+
+  --text-primary:     #FFFFFF;
+  --text-secondary:   #A1A1AA;
+  --text-muted:       #52525B;
+
+  /* Backward compat */
+  --navy-950:         var(--surface-base);
+  --navy-900:         var(--surface-base);
+  --surface:          var(--surface-base);
+  --surface-elevated: var(--surface-1);
+  --surface-card:     var(--surface-1);
+}
+
+/* --- LIGHT THEME (Clean Enterprise) --- */
+:root.light {
+  --surface-base:     #F9FAFB; /* Slate 50 */
+  --surface-1:        #FFFFFF; /* White Cards */
+  --surface-2:        #F3F4F6; /* Slate 100 */
+  --surface-border:   rgba(0, 0, 0, 0.06);
+  --surface-border-2: rgba(0, 0, 0, 0.1);
+
+  --text-primary:     #111827; /* Slate 900 */
+  --text-secondary:   #4B5563; /* Slate 600 */
+  --text-muted:       #9CA3AF; /* Slate 400 */
+
+  /* Backward compat */
+  --navy-950:         var(--surface-base);
+  --navy-900:         var(--surface-base);
+  --surface:          var(--surface-base);
+  --surface-elevated: var(--surface-1);
+  --surface-card:     var(--surface-1);
 }
 
 /* ─── Base Reset ─────────────────────────────────────────────────────────────── */
@@ -60,16 +76,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.2s ease;
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: var(--surface-base); }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.16); }
+::-webkit-scrollbar-thumb { background: var(--surface-border-2); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ─── Selection ──────────────────────────────────────────────────────────────── */
-::selection { background: rgba(0,255,148,0.15); color: #fff; }
+::selection { background: rgba(0,255,148,0.15); color: inherit; }
 
 /* ─── Focus ──────────────────────────────────────────────────────────────────── */
 *:focus-visible { outline: 2px solid var(--accent-green); outline-offset: 2px; border-radius: 4px; }
@@ -81,38 +98,33 @@ h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; line-h
 .label {
   font-size: 11px;
   font-family: var(--font-mono);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--text-muted);
   font-weight: 500;
 }
 
 /* ─── Surface System ─────────────────────────────────────────────────────────── */
-/* Level 0: page background — surface-base */
-/* Level 1: cards, panels */
-.surface-1 {
+.surface-1 { background: var(--surface-1); border: 1px solid var(--surface-border); }
+.surface-2 { background: var(--surface-2); border: 1px solid var(--surface-border-2); }
+.glass-card {
   background: var(--surface-1);
   border: 1px solid var(--surface-border);
-}
-/* Level 2: nested elements, hover states */
-.surface-2 {
-  background: var(--surface-2);
-  border: 1px solid var(--surface-border-2);
-}
-/* Glass: modals and featured highlight cards ONLY */
-.glass-card {
-  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+}
+:root:not(.light) .glass-card {
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* ─── Card Hover Micro-interaction ──────────────────────────────────────────── */
-.card-hover {
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-}
+.card-hover { transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; }
 .card-hover:hover {
   transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  border-color: var(--surface-border-2);
+}
+:root:not(.light) .card-hover:hover {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
   border-color: rgba(255, 255, 255, 0.14);
 }
@@ -123,66 +135,42 @@ h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; line-h
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite;
 }
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position:  200% 0; }
-}
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
 /* ─── Sidebar Active ─────────────────────────────────────────────────────────── */
-.nav-item-active {
-  background: rgba(255, 255, 255, 0.05);
-  border-left: 2px solid #fff;
-  color: #fff;
-}
+.nav-item-active { background: rgba(0, 255, 148, 0.06); border-left: 2px solid var(--color-primary); color: var(--color-primary) !important; }
+:root.light .nav-item-active { background: rgba(0, 255, 148, 0.08); }
 
 /* ─── Status Badges ──────────────────────────────────────────────────────────── */
-.badge-critical { background: rgba(239,68,68,0.12);  color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
-.badge-high     { background: rgba(249,115,22,0.12); color: #fb923c; border: 1px solid rgba(249,115,22,0.25); }
-.badge-medium   { background: rgba(234,179,8,0.12);  color: #facc15; border: 1px solid rgba(234,179,8,0.25); }
-.badge-low      { background: rgba(34,197,94,0.12);  color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
-.badge-green    { background: rgba(34,197,94,0.12);  color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
-.badge-amber    { background: rgba(234,179,8,0.12);  color: #facc15; border: 1px solid rgba(234,179,8,0.25); }
-.badge-red      { background: rgba(239,68,68,0.12);  color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+.badge-critical { background: rgba(239,68,68,0.12);  color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+.badge-high     { background: rgba(249,115,22,0.12); color: #f97316; border: 1px solid rgba(249,115,22,0.2); }
+.badge-medium   { background: rgba(234,179,8,0.12);  color: #eab308; border: 1px solid rgba(234,179,8,0.2); }
+.badge-low      { background: rgba(34,197,94,0.12);  color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+.badge-green    { background: rgba(34,197,94,0.12);  color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
 
 /* ─── Inputs ─────────────────────────────────────────────────────────────────── */
 .input-field {
-  background: var(--surface-1);
+  background: var(--surface-2);
   border: 1px solid var(--surface-border);
   color: var(--text-primary);
   border-radius: 8px;
   padding: 10px 14px;
   font-family: var(--font-body);
   font-size: 13px;
-  transition: border-color 0.18s, box-shadow 0.18s;
+  transition: border-color 0.18s;
   width: 100%;
   display: block;
 }
-.input-field:focus { outline: none; border-color: rgba(255,255,255,0.3); box-shadow: 0 0 0 3px rgba(255,255,255,0.05); }
+.input-field:focus { outline: none; border-color: var(--accent-green); box-shadow: 0 0 0 3px rgba(16,185,129,0.06); }
 .input-field::placeholder { color: var(--text-muted); }
 
-/* ─── Recharts Overrides ─────────────────────────────────────────────────────── */
-.recharts-cartesian-grid-horizontal line,
-.recharts-cartesian-grid-vertical line { stroke: rgba(255,255,255,0.04) !important; }
-.recharts-text { fill: var(--text-muted) !important; font-family: var(--font-mono); font-size: 10px; }
-.recharts-tooltip-wrapper .recharts-default-tooltip {
-  background: var(--surface-2) !important;
-  border: 1px solid var(--surface-border-2) !important;
-  border-radius: 8px !important;
-  font-family: var(--font-body) !important;
-  font-size: 13px !important;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
-}
-
-/* ─── Brand / Landing Utilities (homepage only) ─────────────────────────────── */
+/* ─── Brand / Landing Utilities ─────────────────────────────── */
 .iridescent-bg {
   background: linear-gradient(135deg, #0D7377 0%, #a78bfa 50%, #00FF94 100%);
   background-size: 200% 200%;
   animation: bg-pan 8s linear infinite;
 }
-@keyframes bg-pan {
-  0%   { background-position: 0%   50%; }
-  100% { background-position: 200% 50%; }
-}
+@keyframes bg-pan { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
 
 .text-gradient-vibrant {
   background: linear-gradient(to right, #00FF94, #0D7377, #a78bfa, #f472b6);
@@ -192,21 +180,7 @@ h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; line-h
   background-size: 300% 100%;
   animation: glass-shimmer 4s infinite linear;
 }
-@keyframes glass-shimmer {
-  0%   { background-position: 0%   0%; }
-  100% { background-position: 100% 0%; }
-}
-
-.glass-vibrant {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-.glass-vibrant:hover {
-  border-color: rgba(255,255,255,0.14);
-  background: rgba(255, 255, 255, 0.04);
-}
+@keyframes glass-shimmer { 0% { background-position: 0% 0%; } 100% { background-position: 100% 0%; } }
 
 .btn-vibrant {
   background: linear-gradient(135deg, #00FF94 0%, #0D9488 100%);
@@ -215,13 +189,4 @@ h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; line-h
   transition: filter 0.2s ease, transform 0.15s ease;
   cursor: pointer;
 }
-.btn-vibrant:hover {
-  filter: brightness(1.08);
-  transform: scale(1.015);
-}
-
-/* ─── Grid Backgrounds (legacy — unused but kept for compat) ─────────────────── */
-.grid-bg { background: transparent; }
-
-/* ─── Noise Overlay (removed — was causing visual noise) ─────────────────────── */
-.noise-overlay::after { display: none; }
+.btn-vibrant:hover { filter: brightness(1.08); transform: scale(1.015); }

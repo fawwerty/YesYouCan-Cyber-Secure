@@ -15,8 +15,12 @@ router.put("/:id", authenticate, async (req, res) => {
     if (req.user._id.toString() !== req.params.id && !["super_admin", "admin"].includes(req.user.role)) {
       return res.status(403).json({ success: false, message: "Forbidden" });
     }
-    const { password, role, ...updates } = req.body;
-    if (role && ["super_admin", "admin"].includes(req.user.role)) updates.role = role;
+    const { password, role, permissions, clearanceLevel, ...updates } = req.body;
+    if (["super_admin", "admin"].includes(req.user.role)) {
+      if (role) updates.role = role;
+      if (permissions) updates.permissions = permissions;
+      if (clearanceLevel) updates.clearanceLevel = clearanceLevel;
+    }
     const user = await User.findOneAndUpdate(
       { _id: req.params.id, tenant_id: req.tenantId },
       updates, { new: true, runValidators: true }

@@ -32,6 +32,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const { user, tenant, isAuthenticated, logout } = useAuthStore();
+  const { theme, toggleTheme } = useThemeStore();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [notifications, setNotifications] = useState<any[]>([]);
@@ -164,14 +165,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className="flex h-screen overflow-hidden" style={{ background: "var(--navy-950)" }}>
+    <div className={cn("flex h-screen overflow-hidden", theme === "light" && "light")} style={{ background: "var(--surface-base)" }}>
       {/* Desktop Sidebar */}
       <motion.aside
         animate={{ width: collapsed ? 64 : 240 }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
         className="hidden md:flex flex-col flex-shrink-0 border-r relative z-20"
         style={{
-          background: "linear-gradient(180deg, #111827 0%, #0f1a2e 100%)",
+          background: "var(--surface-1)",
           borderColor: "var(--surface-border)",
         }}
       >
@@ -179,7 +180,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="absolute -right-3 top-20 w-6 h-6 rounded-full border flex items-center justify-center z-30 transition-colors"
-          style={{ background: "var(--surface-card)", borderColor: "var(--surface-border)", color: "var(--text-secondary)" }}
+          style={{ background: "var(--surface-2)", borderColor: "var(--surface-border)", color: "var(--text-secondary)" }}
         >
           {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
         </button>
@@ -195,7 +196,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <motion.aside initial={{ x: -240 }} animate={{ x: 0 }} exit={{ x: -240 }}
               transition={{ duration: 0.2 }}
               className="fixed left-0 top-0 bottom-0 w-60 z-40 md:hidden border-r"
-              style={{ background: "#111827", borderColor: "var(--surface-border)" }}>
+              style={{ background: "var(--surface-1)", borderColor: "var(--surface-border)" }}>
               <SidebarContent />
             </motion.aside>
           </>
@@ -207,7 +208,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {/* Top bar */}
         <header className="flex-shrink-0 h-[60px] flex items-center justify-between px-4 md:px-6 border-b"
           style={{
-            background: "rgba(17,24,39,0.95)",
+            background: "var(--surface-1)",
             borderColor: "var(--surface-border)",
             backdropFilter: "blur(8px)",
           }}>
@@ -224,10 +225,20 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg border border-[var(--surface-border)] hover:bg-[var(--surface-2)] transition-colors"
+              style={{ color: "var(--text-secondary)" }}
+              title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+
             {/* Live status */}
             <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg"
-              style={{ background: "var(--surface-elevated)", border: "1px solid var(--surface-border)" }}>
+              style={{ background: "var(--surface-2)", border: "1px solid var(--surface-border)" }}>
               <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "var(--accent-green)" }} />
               <span className="font-mono text-xs" style={{ color: "var(--text-muted)" }}>LIVE</span>
             </div>
@@ -236,7 +247,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <div className="relative">
               <button onClick={() => setNotifOpen(!notifOpen)}
                 className="relative p-2 rounded-lg transition-colors"
-                style={{ background: "var(--surface-elevated)", color: "var(--text-secondary)" }}>
+                style={{ background: "var(--surface-2)", color: "var(--text-secondary)" }}>
                 <Bell size={16} />
                 {notifications.length > 0 && (
                   <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full text-xs flex items-center justify-center font-mono"

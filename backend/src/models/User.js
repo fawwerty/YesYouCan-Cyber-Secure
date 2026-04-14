@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema(
       default: "employee",
       index: true,
     },
+    permissions: [{ type: String }], // DAC: specific feature access
+    clearanceLevel: { type: Number, min: 1, max: 5, default: 1 }, // MAC: sensitivity clearance
     avatar: { type: String, default: null },
     department: { type: String, default: null },
     isActive: { type: Boolean, default: true },
