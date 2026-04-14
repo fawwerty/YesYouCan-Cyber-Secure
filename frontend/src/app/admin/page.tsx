@@ -2,10 +2,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Settings, Users, Shield } from "lucide-react";
-import api from "../../lib/api";
+import api from "@/lib/api";
 import { SectionHeader, KPICard, Badge } from "../../components/ui/index";
-import { formatDate, ROLE_LABELS } from "../../lib/utils";
-import useAuthStore from "../../store/authStore";
+import { formatDate, ROLE_LABELS } from "@/lib/utils";
+import useAuthStore from "@/store/authStore";
 import toast from "react-hot-toast";
 
 export default function AdminPage() {

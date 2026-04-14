@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Shield, Zap, Lock } from "lucide-react";
-import useAuthStore from "../../../store/authStore";
+import useAuthStore from "@/store/authStore";
 import toast from "react-hot-toast";
 import Link from "next/link";
 

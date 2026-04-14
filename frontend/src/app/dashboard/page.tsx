@@ -5,13 +5,13 @@ import {
   AlertTriangle, ShieldCheck, Leaf, TrendingUp, Zap,
   Truck, ClipboardList, Users, RefreshCw, Award
 } from "lucide-react";
-import api from "../../lib/api";
+import api from "@/lib/api";
 import { KPICard, CardSkeleton, SectionHeader, CircularProgress } from "../../components/ui/index";
-import { formatCO2, complianceColor, riskLevel } from "../../lib/utils";
+import { formatCO2, complianceColor, riskLevel } from "@/lib/utils";
 import EmissionsTrendChart from "../../components/charts/EmissionsTrend";
 import RiskHeatmap from "../../components/charts/RiskHeatmap";
 import ComplianceRadar from "../../components/charts/ComplianceRadar";
-import useAuthStore from "../../store/authStore";
+import useAuthStore from "@/store/authStore";
 import toast from "react-hot-toast";
 
 export default function DashboardPage() {
