@@ -138,6 +138,16 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 const start = async () => {
+  // Production Environment Validation
+  const requiredVars = ["MONGODB_URI", "JWT_SECRET"];
+  const missingVars = requiredVars.filter(v => !process.env[v]);
+  
+  if (missingVars.length > 0) {
+    logger.error(`❌ CRITICAL ERROR: Missing required environment variables: ${missingVars.join(", ")}`);
+    logger.error("Please add these in your Render/Deployment dashboard Environment settings.");
+    process.exit(1);
+  }
+
   try {
     await connectDB();
     await connectRedis();
