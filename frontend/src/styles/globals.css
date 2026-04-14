@@ -1,27 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --navy-950: #0A0F1E;
-  --navy-900: #131e46;
-  --teal-primary: #0D7377;
-  --teal-light: #14A0A5;
-  --accent-green: #00FF94;
-  --accent-green-dim: #00CC77;
-  --surface: #111827;
-  --surface-elevated: #1a2235;
-  --surface-card: #1e2a40;
-  --surface-border: #2a3a54;
-  --text-primary: #F0F4FF;
-  --text-secondary: #8b9ab8;
-  --text-muted: #4a5a78;
+  --navy-950: #000000;
+  --navy-900: #000000;
+  --teal-primary: #10b981;
+  --teal-light: #34d399;
+  --accent-green: #10b981;
+  --accent-green-dim: #059669;
+  --surface: #000000;
+  --surface-elevated: #090909;
+  --surface-card: #0A0A0A;
+  --surface-border: rgba(255, 255, 255, 0.08); /* Editor style border */
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-muted: #52525B;
 
-  --font-display: 'Syne', system-ui, sans-serif;
-  --font-body: 'Cabinet Grotesk', system-ui, sans-serif;
+  --font-display: 'Outfit', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 

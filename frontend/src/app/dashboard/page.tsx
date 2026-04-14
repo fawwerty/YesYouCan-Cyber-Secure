@@ -55,10 +55,11 @@ export default function DashboardPage() {
       <SectionHeader
         title={`Good ${new Date().getHours() < 12 ? "morning" : "afternoon"}, ${user?.firstName}`}
         subtitle="Here's your integrated GRC & Sustainability overview"
+        className="font-display italic"
         action={
           <button onClick={handleRefresh} disabled={refreshing}
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all"
-            style={{ background: "var(--surface-elevated)", border: "1px solid var(--surface-border)", color: "var(--text-secondary)" }}>
+            style={{ background: "#090909", border: "1px solid var(--surface-border)", color: "var(--text-secondary)" }}>
             <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
             {refreshing ? "Refreshing…" : "Refresh"}
           </button>
@@ -69,21 +70,20 @@ export default function DashboardPage() {
       <motion.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-card rounded-2xl p-4 mb-6 flex items-center gap-4 glow-border"
+        className="bg-[#090909] rounded-xl p-5 mb-6 flex items-center gap-4 border border-surface-border"
       >
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-          style={{ background: "rgba(0,255,148,0.12)" }}>
-          <Award size={20} style={{ color: "var(--accent-green)" }} />
+        <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 bg-accent-green">
+          <Award size={24} className="text-black" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="font-display font-semibold text-white text-sm">
-            35% Compliance Improvement Benchmark Achieved
+          <p className="font-display font-bold text-white text-lg italic uppercase tracking-tight">
+            Compliance Benchmark Achieved
           </p>
-          <p className="text-xs mt-0.5" style={{ color: "var(--text-secondary)" }}>
-            Validated KPI — Strategic direction by Christiana Konlan Kennedy · YesYouCan Cyber Secure
+          <p className="text-xs mt-0.5 font-body text-text-muted">
+            Internal Validation: YesYouCan Digital Management Suite
           </p>
         </div>
-        <div className="font-display font-bold text-3xl flex-shrink-0" style={{ color: "var(--accent-green)" }}>+35%</div>
+        <div className="font-display font-black text-4xl flex-shrink-0 text-accent-green">+35%</div>
       </motion.div>
 
       {/* KPI row */}
@@ -268,12 +268,11 @@ export default function DashboardPage() {
       {/* Footer */}
       <motion.footer
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
-        className="mt-10 pt-6 border-t text-center"
-        style={{ borderColor: "var(--surface-border)" }}>
-        <p className="font-mono text-xs" style={{ color: "var(--text-muted)", lineHeight: 1.9 }}>
-          © 2025 YesYouCan Cyber Secure. All rights reserved.<br />
-          CEO: Dr. Noah Darko-Adjei | Strategic Advisor: Christiana Konlan Kennedy<br />
-          Built for enterprise governance, sustainability, and cybersecurity excellence.
+        className="mt-16 pt-8 border-t text-center border-surface-border"
+      >
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-muted">
+          YesYouCan Cyber Secure • © 2025<br />
+          Enterprise-grade governance, sustainability, and cybersecurity.
         </p>
       </motion.footer>
     </div>
