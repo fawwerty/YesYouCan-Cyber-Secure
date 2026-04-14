@@ -10,16 +10,12 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 5000
       - key: MONGODB_URI
         sync: false # Requires manual entry in Render Dashboard
       - key: JWT_SECRET
         generateValue: true
       - key: JWT_REFRESH_SECRET
         generateValue: true
-      - key: FRONTEND_URL
-        value: https://your-frontend-domain.vercel.app
       - key: REDIS_URL
         fromService:
           type: keyvalue
@@ -33,13 +29,11 @@ services:
     rootDir: ai-service
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8000
-    envVars:
-      - key: PORT
-        value: 8000
+    # Render will automatically inject $PORT, so we listen on that
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
   # 🧠 YesYouCan Redis Cache
   - type: keyvalue
     name: yyc-cache
     plan: free
-    ipAllowList: [] # Only allow internal Render services
+    ipAllowList: []
