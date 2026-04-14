@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Shield, Zap, Lock } from "lucide-react";
+import { Eye, EyeOff, Shield, Lock } from "lucide-react";
 import useAuthStore from "@/store/authStore";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default function LoginPage() {
       toast.success("Welcome back");
       router.push("/dashboard");
     } catch (err: any) {
-      toast.error(err?.response?.data?.message || "Login failed");
+      toast.error(err?.response?.data?.message || "");
     }
   };
 
@@ -133,34 +133,6 @@ export default function LoginPage() {
               )}
             </motion.button>
           </form>
-
-          <div className="mt-6 pt-6" style={{ borderTop: "1px solid var(--surface-border)" }}>
-            <div className="flex items-center gap-2 mb-3">
-              <Zap size={12} style={{ color: "var(--accent-green)" }} />
-              <span className="font-mono text-xs" style={{ color: "var(--text-muted)" }}>DEMO CREDENTIALS</span>
-            </div>
-            <div className="space-y-1">
-              {[
-                { role: "Super Admin", email: "superadmin@yesyoucan.com" },
-                { role: "Admin", email: "admin@yesyoucan.com" },
-                { role: "Analyst", email: "analyst@yesyoucan.com" },
-                { role: "Executive", email: "executive@yesyoucan.com" },
-              ].map((cred) => (
-                <button
-                  key={cred.email}
-                  type="button"
-                  onClick={() => { setEmail(cred.email); setPassword("Password123!"); }}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs transition-colors"
-                  style={{ background: "var(--surface-elevated)", color: "var(--text-secondary)" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-green)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
-                >
-                  <span className="font-mono">{cred.role}</span>
-                  <span className="ml-2 opacity-60">{cred.email}</span>
-                </button>
-              ))}
-            </div>
-          </div>
         </motion.div>
 
         <motion.p
