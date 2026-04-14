@@ -4,7 +4,7 @@ import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { cn, formatNumber } from "../../lib/utils";
 import { ReactNode } from "react";
 
-// ─── KPI Card ───────────────────────────────────────────────────────────────
+// ─── KPI Card — Decision-first hierarchy ───────────────────────────────────────
 interface KPICardProps {
   label: string;
   value: number | string;
@@ -16,51 +16,67 @@ interface KPICardProps {
   formatter?: (v: number) => string;
 }
 
-export function KPICard({ label, value, unit, change, icon, color = "#00FF94", delay = 0, formatter }: KPICardProps) {
-  const displayValue = typeof value === "number" ? (formatter ? formatter(value) : formatNumber(value, 0)) : value;
-  const trendIcon = change === undefined ? null : change > 0 ? <TrendingUp size={12} /> : change < 0 ? <TrendingDown size={12} /> : <Minus size={12} />;
-  const trendColor = change === undefined ? undefined : change > 0 ? "#4ade80" : change < 0 ? "#f87171" : "#94a3b8";
+export function KPICard({
+  label, value, unit, change, icon,
+  color = "var(--color-success)",
+  delay = 0, formatter
+}: KPICardProps) {
+  const displayValue =
+    typeof value === "number"
+      ? formatter ? formatter(value) : formatNumber(value, 0)
+      : value;
+
+  // Trend — color-coded by purpose, not just style
+  const trend =
+    change === undefined ? null : {
+      icon: change > 0 ? <TrendingUp size={13} /> : change < 0 ? <TrendingDown size={13} /> : <Minus size={13} />,
+      color: change > 0 ? "var(--color-success)" : change < 0 ? "var(--color-danger)" : "var(--text-muted)",
+      label: change > 0 ? `+${Math.abs(change)}%` : change < 0 ? `-${Math.abs(change)}%` : "No change",
+    };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.4, ease: "easeOut" }}
-      className="glass-card rounded-2xl p-5 relative overflow-hidden group hover:border-opacity-80 transition-all duration-300"
-      style={{ borderColor: `${color}22` }}
+      initial={{ opacity: 0, y: 8, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ delay, duration: 0.3, ease: "easeOut" }}
+      className="card-hover"
+      style={{
+        background: "var(--surface-1)",
+        border: "1px solid var(--surface-border)",
+        borderRadius: "12px",
+        padding: "20px",
+        cursor: "default",
+      }}
     >
-      {/* Glow spot */}
-      <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: `radial-gradient(circle at center, ${color}18 0%, transparent 70%)`, transform: "translate(30%, -30%)" }} />
-
-      <div className="flex items-start justify-between mb-3">
-        <span className="font-mono text-xs uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>{label}</span>
+      {/* Row 1: Label (metadata, not content) + Icon */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "14px" }}>
+        <span className="label">{label}</span>
         {icon && (
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{ background: `${color}18`, color }}>
+          <div style={{ width: "30px", height: "30px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--surface-2)", color: "var(--text-muted)" }}>
             {icon}
           </div>
         )}
       </div>
 
-      <div className="flex items-end gap-2">
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: delay + 0.2, duration: 0.6 }}
-          className="font-display font-bold text-3xl leading-none"
-          style={{ color: "var(--text-primary)" }}
-        >
+      {/* Row 2: VALUE — dominant, unforgettable */}
+      <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "10px" }}>
+        <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "32px", lineHeight: 1, color: "var(--text-primary)", letterSpacing: "-0.03em" }}>
           {displayValue}
-        </motion.span>
-        {unit && <span className="font-mono text-xs mb-1" style={{ color: "var(--text-muted)" }}>{unit}</span>}
+        </span>
+        {unit && (
+          <span className="label" style={{ marginBottom: "2px" }}>{unit}</span>
+        )}
       </div>
 
-      {change !== undefined && (
-        <div className="flex items-center gap-1 mt-2">
-          <span style={{ color: trendColor }}>{trendIcon}</span>
-          <span className="font-mono text-xs" style={{ color: trendColor }}>
-            {Math.abs(change)}% vs last period
+      {/* Row 3: Trend — actionable context */}
+      {trend && (
+        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <span style={{ color: trend.color, display: "flex", alignItems: "center" }}>{trend.icon}</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: trend.color, fontWeight: 600 }}>
+            {trend.label}
+          </span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--text-muted)" }}>
+            vs last period
           </span>
         </div>
       )}
@@ -68,7 +84,7 @@ export function KPICard({ label, value, unit, change, icon, color = "#00FF94", d
   );
 }
 
-// ─── Badge ───────────────────────────────────────────────────────────────────
+// ─── Badge ────────────────────────────────────────────────────────────────────
 interface BadgeProps {
   label: string;
   variant?: "green" | "amber" | "red" | "blue" | "ghost";
@@ -79,29 +95,35 @@ export function Badge({ label, variant = "ghost", size = "sm" }: BadgeProps) {
   const styles: Record<string, string> = {
     green: "badge-green",
     amber: "badge-amber",
-    red: "badge-red",
-    blue: "bg-blue-500/15 text-blue-300 border border-blue-500/30",
-    ghost: "bg-[var(--surface-elevated)] text-[var(--text-secondary)] border border-[var(--surface-border)]",
+    red:   "badge-red",
+    blue:  "bg-blue-500/10 text-blue-300 border border-blue-500/20",
+    ghost: "border text-[var(--text-secondary)]",
   };
+  const ghostStyle = variant === "ghost"
+    ? { background: "var(--surface-2)", borderColor: "var(--surface-border)" }
+    : {};
+
   return (
-    <span className={cn("inline-flex items-center font-mono rounded-md font-medium", styles[variant],
-      size === "sm" ? "px-2 py-0.5 text-xs" : "px-3 py-1 text-xs")}>
+    <span
+      className={cn("inline-flex items-center font-mono rounded font-medium", styles[variant], size === "sm" ? "px-2 py-0.5 text-xs" : "px-3 py-1 text-xs")}
+      style={ghostStyle}
+    >
       {label}
     </span>
   );
 }
 
-// ─── Skeleton ────────────────────────────────────────────────────────────────
+// ─── Skeleton ─────────────────────────────────────────────────────────────────
 export function Skeleton({ className }: { className?: string }) {
   return <div className={cn("skeleton rounded-lg", className)} />;
 }
 
 export function CardSkeleton() {
   return (
-    <div className="glass-card rounded-2xl p-5 space-y-3">
-      <Skeleton className="h-3 w-24" />
-      <Skeleton className="h-8 w-32" />
-      <Skeleton className="h-3 w-20" />
+    <div style={{ background: "var(--surface-1)", border: "1px solid var(--surface-border)", borderRadius: "12px", padding: "20px" }} className="space-y-3">
+      <Skeleton className="h-2.5 w-20" />
+      <Skeleton className="h-8 w-28" />
+      <Skeleton className="h-2.5 w-16" />
     </div>
   );
 }
@@ -115,17 +137,21 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ title, subtitle, action }: SectionHeaderProps) {
   return (
-    <div className="flex items-start justify-between mb-6">
+    <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "24px" }}>
       <div>
-        <h1 className="font-display font-bold text-2xl text-white">{title}</h1>
-        {subtitle && <p className="text-sm mt-1" style={{ color: "var(--text-secondary)" }}>{subtitle}</p>}
+        <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "22px", color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
+          {title}
+        </h1>
+        {subtitle && (
+          <p style={{ fontSize: "13px", color: "var(--text-muted)", marginTop: "4px" }}>{subtitle}</p>
+        )}
       </div>
       {action && <div>{action}</div>}
     </div>
   );
 }
 
-// ─── Circular Progress ───────────────────────────────────────────────────────
+// ─── Circular Progress ────────────────────────────────────────────────────────
 interface CircularProgressProps {
   value: number;
   size?: number;
@@ -134,43 +160,41 @@ interface CircularProgressProps {
   label?: string;
 }
 
-export function CircularProgress({ value, size = 80, strokeWidth = 6, color = "#00FF94", label }: CircularProgressProps) {
+export function CircularProgress({ value, size = 72, strokeWidth = 5, color = "var(--color-success)", label }: CircularProgressProps) {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const dash = (value / 100) * circumference;
 
   return (
-    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={radius} fill="none" strokeWidth={strokeWidth}
-          stroke="rgba(42,58,84,0.8)" />
+    <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", width: size, height: size }}>
+      <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
+        <circle cx={size / 2} cy={size / 2} r={radius} fill="none" strokeWidth={strokeWidth} stroke="var(--surface-2)" />
         <motion.circle
           cx={size / 2} cy={size / 2} r={radius} fill="none" strokeWidth={strokeWidth}
           stroke={color} strokeLinecap="round"
           strokeDasharray={circumference}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: circumference - dash }}
-          transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
         />
       </svg>
-      <div className="absolute text-center">
-        <div className="font-display font-bold text-sm" style={{ color: "var(--text-primary)" }}>{value}%</div>
-        {label && <div className="font-mono text-xs" style={{ color: "var(--text-muted)", fontSize: 9 }}>{label}</div>}
+      <div style={{ position: "absolute", textAlign: "center" }}>
+        <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "13px", color: "var(--text-primary)" }}>{value}%</div>
+        {label && <div className="label" style={{ fontSize: "8px", marginTop: "1px" }}>{label}</div>}
       </div>
     </div>
   );
 }
 
-// ─── Empty State ─────────────────────────────────────────────────────────────
+// ─── Empty State ──────────────────────────────────────────────────────────────
 export function EmptyState({ icon, title, description }: { icon: ReactNode; title: string; description?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4"
-        style={{ background: "var(--surface-elevated)", color: "var(--text-muted)" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "64px 24px", textAlign: "center" }}>
+      <div style={{ width: "44px", height: "44px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px", background: "var(--surface-1)", border: "1px solid var(--surface-border)", color: "var(--text-muted)" }}>
         {icon}
       </div>
-      <h3 className="font-display font-semibold text-white mb-1">{title}</h3>
-      {description && <p className="text-sm max-w-xs" style={{ color: "var(--text-secondary)" }}>{description}</p>}
+      <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "15px", color: "var(--text-primary)", marginBottom: "6px" }}>{title}</h3>
+      {description && <p style={{ fontSize: "13px", color: "var(--text-muted)", maxWidth: "280px", lineHeight: 1.6 }}>{description}</p>}
     </div>
   );
 }
