@@ -27,44 +27,58 @@ export default function RegisterPage() {
       toast.success("Organization registered successfully!");
       router.push("/dashboard");
     } catch (err: any) {
-      toast.error(err?.response?.data?.message || "Registration failed");
+      toast.error(err?.response?.data?.message || "Registration failed. Please try again.");
     }
   };
 
   const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
+  const labelStyle: React.CSSProperties = {
+    display: "block",
+    fontFamily: "monospace",
+    fontSize: "10px",
+    color: "rgba(255,255,255,0.4)",
+    textTransform: "uppercase",
+    letterSpacing: "0.12em",
+    marginBottom: "7px",
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black py-12">
-      {/* Professional Background */}
-      <div className="absolute inset-0 z-0">
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "#000", paddingTop: "48px", paddingBottom: "48px" }}>
+      
+      {/* Cinematic background */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <Image
-          src="/assets/site-bg.png"
+          src="/assets/auth-bg.png"
           alt="Background"
           fill
-          className="object-cover"
+          style={{ objectFit: "cover" }}
           priority
         />
-        <div className="absolute inset-0 bg-black/75" />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.82) 100%)" }} />
       </div>
 
-      <div className="w-full max-w-[440px] px-6 relative z-10">
-        {/* Logo */}
+      {/* Form container */}
+      <div style={{ width: "100%", maxWidth: "440px", padding: "0 24px", position: "relative", zIndex: 10 }}>
+
+        {/* Brand */}
         <motion.div
-          initial={{ opacity: 0, y: -16 }}
+          initial={{ opacity: 0, y: -14 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-7"
+          transition={{ duration: 0.4 }}
+          style={{ textAlign: "center", marginBottom: "24px" }}
         >
-          <div className="inline-flex items-center gap-2.5 mb-5">
-            <div className="w-9 h-9 rounded-md flex items-center justify-center iridescent-bg">
-              <Shield size={17} className="text-black" />
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
+            <div className="iridescent-bg" style={{ width: "36px", height: "36px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Shield size={16} style={{ color: "#000" }} />
             </div>
             <div>
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", color: "#fff", lineHeight: 1 }}>YesYouCan</div>
               <div style={{ fontFamily: "monospace", fontSize: "9px", color: "var(--accent-green)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase" }}>Cyber Secure</div>
             </div>
           </div>
-          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "22px", color: "#fff", marginBottom: "6px", letterSpacing: "-0.01em" }}>
+          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "20px", color: "#fff", marginBottom: "5px", letterSpacing: "-0.01em" }}>
             Create your organization
           </h1>
           <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.45)" }}>
@@ -74,55 +88,48 @@ export default function RegisterPage() {
 
         {/* Card */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08 }}
-          className="glass-vibrant rounded-xl p-7"
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "14px", padding: "28px", backdropFilter: "blur(20px)" }}
         >
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
-                Organization Name
-              </label>
+          <form onSubmit={handleSubmit}>
+            {/* Org name */}
+            <div style={{ marginBottom: "14px" }}>
+              <label style={labelStyle}>Organization Name</label>
               <input type="text" value={form.organizationName} onChange={update("organizationName")}
                 className="input-field" placeholder="Acme Corporation" required />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            {/* Name row */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "14px" }}>
               <div>
-                <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
-                  First Name
-                </label>
+                <label style={labelStyle}>First Name</label>
                 <input type="text" value={form.firstName} onChange={update("firstName")}
                   className="input-field" placeholder="John" required />
               </div>
               <div>
-                <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
-                  Last Name
-                </label>
+                <label style={labelStyle}>Last Name</label>
                 <input type="text" value={form.lastName} onChange={update("lastName")}
                   className="input-field" placeholder="Doe" required />
               </div>
             </div>
 
-            <div>
-              <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
-                Email Address
-              </label>
+            {/* Email */}
+            <div style={{ marginBottom: "14px" }}>
+              <label style={labelStyle}>Email Address</label>
               <input type="email" value={form.email} onChange={update("email")}
                 className="input-field" placeholder="you@company.com" required />
             </div>
 
-            <div>
-              <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
-                Password
-              </label>
-              <div className="relative">
+            {/* Password */}
+            <div style={{ marginBottom: "20px" }}>
+              <label style={labelStyle}>Password</label>
+              <div style={{ position: "relative" }}>
                 <input type={showPw ? "text" : "password"} value={form.password} onChange={update("password")}
-                  className="input-field pr-10" placeholder="Min. 8 characters" required minLength={8} />
+                  className="input-field" style={{ paddingRight: "40px" }} placeholder="Min. 8 characters" required minLength={8} />
                 <button type="button" onClick={() => setShowPw(!showPw)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
-                  style={{ color: "rgba(255,255,255,0.35)" }}>
+                  style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", color: "rgba(255,255,255,0.35)", background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center" }}>
                   {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
@@ -133,11 +140,11 @@ export default function RegisterPage() {
               disabled={isLoading}
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
-              className="w-full py-3 rounded-lg btn-vibrant flex items-center justify-center gap-2 mt-1"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "13px" }}
+              className="btn-vibrant"
+              style={{ width: "100%", padding: "12px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "13px", border: "none", cursor: isLoading ? "not-allowed" : "pointer" }}
             >
               {isLoading ? (
-                <><div className="w-4 h-4 border-2 rounded-full animate-spin border-black/40 border-t-black" /> Creating workspace…</>
+                <><div style={{ width: "16px", height: "16px", border: "2px solid", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} /> Creating workspace…</>
               ) : (
                 "Create Organization Account"
               )}
@@ -145,9 +152,9 @@ export default function RegisterPage() {
           </form>
         </motion.div>
 
-        <p className="text-center mt-5" style={{ fontSize: "12px", color: "rgba(255,255,255,0.35)" }}>
+        <p style={{ textAlign: "center", marginTop: "18px", fontSize: "12px", color: "rgba(255,255,255,0.35)" }}>
           Already have an account?{" "}
-          <Link href="/auth/login" style={{ color: "var(--accent-green)", fontWeight: 600 }} className="hover:underline">
+          <Link href="/auth/login" style={{ color: "var(--accent-green)", fontWeight: 600, textDecoration: "none" }}>
             Sign in
           </Link>
         </p>

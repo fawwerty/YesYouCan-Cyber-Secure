@@ -27,37 +27,41 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-      {/* Professional Background */}
-      <div className="absolute inset-0 z-0">
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "#000" }}>
+      
+      {/* Cinematic background */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <Image
-          src="/assets/site-bg.png"
+          src="/assets/auth-bg.png"
           alt="Background"
           fill
-          className="object-cover"
+          style={{ objectFit: "cover" }}
           priority
         />
-        <div className="absolute inset-0 bg-black/75" />
+        {/* Gradient overlay for readability */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.82) 100%)" }} />
       </div>
 
-      <div className="w-full max-w-[400px] px-6 relative z-10">
-        {/* Logo */}
+      {/* Form container */}
+      <div style={{ width: "100%", maxWidth: "400px", padding: "0 24px", position: "relative", zIndex: 10 }}>
+        
+        {/* Logo / Brand */}
         <motion.div
-          initial={{ opacity: 0, y: -16 }}
+          initial={{ opacity: 0, y: -14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="text-center mb-8"
+          style={{ textAlign: "center", marginBottom: "28px" }}
         >
-          <div className="inline-flex items-center gap-2.5 mb-5">
-            <div className="w-9 h-9 rounded-md flex items-center justify-center iridescent-bg">
-              <Shield size={17} className="text-black" />
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
+            <div className="iridescent-bg" style={{ width: "36px", height: "36px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <Shield size={16} style={{ color: "#000" }} />
             </div>
-            <div className="text-left">
+            <div style={{ textAlign: "left" }}>
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", color: "#fff", lineHeight: 1 }}>YesYouCan</div>
               <div style={{ fontFamily: "monospace", fontSize: "9px", color: "var(--accent-green)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase" }}>Cyber Secure</div>
             </div>
           </div>
-          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "22px", color: "#fff", marginBottom: "6px", letterSpacing: "-0.01em" }}>
+          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "20px", color: "#fff", marginBottom: "5px", letterSpacing: "-0.01em" }}>
             Sign in to your account
           </h1>
           <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
@@ -67,13 +71,14 @@ export default function LoginPage() {
 
         {/* Card */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.08 }}
-          className="glass-vibrant rounded-xl p-7"
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "14px", padding: "28px", backdropFilter: "blur(20px)" }}
         >
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
+          <form onSubmit={handleSubmit}>
+            {/* Email */}
+            <div style={{ marginBottom: "16px" }}>
               <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
                 Email Address
               </label>
@@ -88,16 +93,18 @@ export default function LoginPage() {
               />
             </div>
 
-            <div>
+            {/* Password */}
+            <div style={{ marginBottom: "20px" }}>
               <label style={{ display: "block", fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "7px" }}>
                 Password
               </label>
-              <div className="relative">
+              <div style={{ position: "relative" }}>
                 <input
                   type={showPw ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="input-field pr-10"
+                  className="input-field"
+                  style={{ paddingRight: "40px" }}
                   placeholder="••••••••"
                   required
                   autoComplete="current-password"
@@ -105,8 +112,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPw(!showPw)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
-                  style={{ color: "rgba(255,255,255,0.35)" }}
+                  style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", color: "rgba(255,255,255,0.35)", background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center" }}
                 >
                   {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -118,12 +124,12 @@ export default function LoginPage() {
               disabled={isLoading}
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
-              className="w-full py-3 rounded-lg btn-vibrant flex items-center justify-center gap-2 mt-1"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "13px" }}
+              className="btn-vibrant"
+              style={{ width: "100%", padding: "12px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "13px", border: "none", cursor: isLoading ? "not-allowed" : "pointer" }}
             >
               {isLoading ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin border-black" />
+                  <div style={{ width: "16px", height: "16px", border: "2px solid", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
                   Authenticating…
                 </>
               ) : (
@@ -136,15 +142,15 @@ export default function LoginPage() {
           </form>
         </motion.div>
 
+        {/* Register link */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-center mt-6"
-          style={{ fontSize: "12px", color: "rgba(255,255,255,0.35)" }}
+          style={{ textAlign: "center", marginTop: "20px", fontSize: "12px", color: "rgba(255,255,255,0.35)" }}
         >
           No account?{" "}
-          <Link href="/auth/register" style={{ color: "var(--accent-green)", fontWeight: 600 }} className="hover:underline">
+          <Link href="/auth/register" style={{ color: "var(--accent-green)", fontWeight: 600, textDecoration: "none" }}>
             Register your organization
           </Link>
         </motion.p>
