@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Shield, Lock } from "lucide-react";
 import useAuthStore from "@/store/authStore";
@@ -144,7 +145,5 @@ export default function LoginPage() {
         </motion.p>
       </div>
     </div>
-  );
-}
   );
 }
