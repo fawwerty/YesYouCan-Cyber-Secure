@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Shield } from "lucide-react";
+import { Eye, EyeOff, Shield, ArrowLeft } from "lucide-react";
 import useAuthStore from "@/store/authStore";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -50,22 +50,29 @@ export default function RegisterPage() {
       {/* Cinematic background context is now managed globally in RootLayout */}
 
       {/* Form container */}
-      <div style={{ width: "100%", maxWidth: "440px", padding: "0 24px", position: "relative", zIndex: 10 }}>
+      <div style={{ width: "100%", maxWidth: "380px", padding: "0 24px", position: "relative", zIndex: 10 }}>
+
+        {/* Back navigation */}
+        <div style={{ marginBottom: "24px", display: "flex", justifyContent: "center" }}>
+          <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "6px", color: "rgba(255,255,255,0.5)", fontSize: "11px", textDecoration: "none", fontFamily: "monospace", letterSpacing: "0.05em", transition: "color 0.2s" }} className="hover:text-primary">
+            <ArrowLeft size={12} /> Back to Hub
+          </Link>
+        </div>
 
         {/* Brand */}
         <motion.div
           initial={{ opacity: 0, y: -14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          style={{ textAlign: "center", marginBottom: "24px" }}
+          style={{ textAlign: "center", marginBottom: "20px" }}
         >
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
-            <div className="iridescent-bg" style={{ width: "36px", height: "36px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Shield size={16} style={{ color: "#000" }} />
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+            <div className="iridescent-bg" style={{ width: "32px", height: "32px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Shield size={14} style={{ color: "#000" }} />
             </div>
-            <div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", color: "#fff", lineHeight: 1 }}>YesYouCan</div>
-              <div style={{ fontFamily: "monospace", fontSize: "9px", color: "var(--accent-green)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase" }}>Cyber Secure</div>
+            <div style={{ textAlign: "left" }}>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "14px", color: "#fff", lineHeight: 1 }}>YesYouCan</div>
+              <div style={{ fontFamily: "monospace", fontSize: "8px", color: "var(--accent-green)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase" }}>Cyber Secure</div>
             </div>
           </div>
           <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "20px", color: "#fff", marginBottom: "5px", letterSpacing: "-0.01em" }}>
@@ -81,7 +88,7 @@ export default function RegisterPage() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08 }}
-          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "14px", padding: "28px", backdropFilter: "blur(20px)" }}
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "24px", padding: "24px", backdropFilter: "blur(20px)" }}
         >
           <form onSubmit={handleSubmit}>
             {/* Org name */}
