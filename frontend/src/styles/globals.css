@@ -50,15 +50,15 @@ html {
 
 /* --- LIGHT THEME (Softened Enterprise) --- */
 :root.light {
-  --surface-base:     #F1F5F9; /* Slate 100 - Reduced 'whitish' intensity */
+  --surface-base:     #F8FAFC; /* Slate 50 refined */
   --surface-1:        #FFFFFF; /* Pure White for elevated cards */
-  --surface-2:        #E2E8F0; /* Slate 200 for nested areas */
-  --surface-border:   rgba(15, 23, 42, 0.08);
-  --surface-border-2: rgba(15, 23, 42, 0.12);
+  --surface-2:        #F1F5F9; /* Slate 100 */
+  --surface-border:   rgba(15, 23, 42, 0.12);
+  --surface-border-2: rgba(15, 23, 42, 0.2);
 
-  --text-primary:     #0F172A; /* Slate 900 */
-  --text-secondary:   #475569; /* Slate 600 */
-  --text-muted:       #9CA3AF; /* Slate 400 */
+  --text-primary:     #0F172A; /* Slate 900 - Crisp black text */
+  --text-secondary:   #334155; /* Slate 700 */
+  --text-muted:       #64748B; /* Slate 500 */
 
   /* Backward compat */
   --navy-950:         var(--surface-base);
@@ -196,6 +196,20 @@ h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; line-h
 .btn-vibrant:hover { filter: brightness(1.08); transform: scale(1.015); }
 .btn-vibrant:active {
   transform: scale(0.98);
+}
+
+/* --- Universal Glass Utility --- */
+.glass-surface {
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+}
+
+:root.light .glass-surface {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+:root.dark .glass-surface {
+  background: rgba(0, 0, 0, 0.45);
 }
 
 /* --- Depth Typography Utilities --- */

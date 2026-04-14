@@ -26,29 +26,30 @@ export default function LandingPage() {
   return (
     <div style={{ minHeight: "100vh", color: "var(--text-primary)", overflowX: "hidden", position: "relative", fontFamily: "var(--font-body)" }}>
 
-      {/* ── HEADER — Full width, tall, traditional, no rounded border ── */}
-      <header style={{
-        position: "absolute", top: 0, left: 0, right: 0, zIndex: 50,
-        background: "rgba(0,0,0,0.3)",
-        borderBottom: "1px solid var(--surface-border)",
-        backdropFilter: "blur(12px)",
-      }}>
+      {/* ── HEADER ── */}
+      <header 
+        className="glass-surface"
+        style={{
+          position: "absolute", top: 0, left: 0, right: 0, zIndex: 50,
+          borderTop: "none", borderLeft: "none", borderRight: "none",
+        }}
+      >
         <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px", height: "72px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          {/* Brand — minimalist, white only */}
+          {/* Brand */}
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div style={{ width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(255,255,255,0.3)", borderRadius: "6px" }}>
-              <Shield size={16} className="text-white" />
+            <div style={{ width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid var(--surface-border)", borderRadius: "6px" }}>
+              <Shield size={16} style={{ color: "var(--color-primary)" }} />
             </div>
             <div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "16px", color: "#fff", lineHeight: 1 }}>YesYouCan</div>
-              <div style={{ fontSize: "9px", color: "#fff", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase", fontFamily: "monospace", opacity: 0.8 }}>Cyber Secure</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "16px", color: "var(--text-primary)", lineHeight: 1 }}>YesYouCan</div>
+              <div style={{ fontSize: "9px", color: "var(--text-muted)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase", fontFamily: "monospace", fontWeight: 700 }}>Cyber Secure</div>
             </div>
           </div>
 
           {/* Nav */}
           <nav style={{ display: "flex", alignItems: "center", gap: "40px" }}>
             {[["Features", "#features"], ["Solutions", "#solutions"], ["About", "#about"]].map(([label, href]) => (
-              <Link key={label} href={href} style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "13px", color: "#fff", textDecoration: "none", opacity: 0.8 }}
+              <Link key={label} href={href} style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "13px", color: "var(--text-primary)", textDecoration: "none", opacity: 0.8 }}
                 className="hover:opacity-100 transition-opacity">{label}</Link>
             ))}
           </nav>
@@ -57,13 +58,13 @@ export default function LandingPage() {
           <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
             <button 
               onClick={toggleTheme}
-              style={{ background: "none", border: "none", color: "#fff", cursor: "pointer", opacity: 0.7, minWidth: "24px", minHeight: "24px", display: "flex", alignItems: "center", justifyContent: "center" }}
+              style={{ background: "none", border: "none", color: "var(--text-primary)", cursor: "pointer", opacity: 0.7, minWidth: "24px", minHeight: "24px", display: "flex", alignItems: "center", justifyContent: "center" }}
               className="hover:opacity-100 transition-opacity"
               aria-label="Toggle Theme"
             >
               {!mounted ? null : (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />)}
             </button>
-            <Link href="/auth/login" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "13px", color: "#fff", opacity: 0.8, textDecoration: "none" }}
+            <Link href="/auth/login" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "13px", color: "var(--text-primary)", opacity: 0.8, textDecoration: "none" }}
               className="hover:opacity-100 transition-opacity">Sign In</Link>
             <Link href="/auth/register" className="btn-vibrant" style={{ padding: "10px 24px", borderRadius: "6px", display: "flex", alignItems: "center", gap: "6px", fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "13px", textDecoration: "none" }}>
               Get Started <ChevronRight size={14} />
@@ -89,14 +90,14 @@ export default function LandingPage() {
             <motion.h1 
               variants={fadeIn} 
               className="text-depth-hero"
-              style={{ fontSize: "clamp(3.5rem, 8vw, 6.5rem)", maxWidth: "1000px", marginBottom: "32px", color: "#ffffff" }}
+              style={{ fontSize: "clamp(2.8rem, 6vw, 4.8rem)", maxWidth: "1000px", marginBottom: "32px", color: "#ffffff" }}
             >
               The Science of Sustainance and Security.
             </motion.h1>
             <motion.p 
               variants={fadeIn} 
               className="text-depth-body"
-              style={{ fontSize: "18px", color: "rgba(255,255,255,0.75)", maxWidth: "680px", marginBottom: "48px" }}
+              style={{ fontSize: "17px", color: "rgba(255,255,255,0.75)", maxWidth: "600px", marginBottom: "48px" }}
             >
               Secure your infrastructure while building a sustainable future. YesYouCan integrates Cybersecurity, ESG metrics, and AI-driven compliance into one powerful ecosystem.
             </motion.p>
@@ -220,42 +221,40 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── FOOTER — Full width, no rounded border, matches header ── */}
-      <footer id="about" style={{ borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.95)", position: "relative", zIndex: 10, padding: "64px 40px 32px" }}>
+      {/* ── FOOTER ── */}
+      <footer id="about" className="glass-surface" style={{ borderLeft: "none", borderRight: "none", borderBottom: "none", position: "relative", zIndex: 10, padding: "80px 40px 40px" }}>
         <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: "60px", marginBottom: "48px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2.5fr 1fr 1fr", gap: "80px", marginBottom: "64px" }}>
             {/* Brand + Leadership */}
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-                <div style={{ width: "28px", height: "28px", border: "1px solid rgba(255,255,255,0.3)", borderRadius: "5px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Shield size={13} style={{ color: "#fff" }} />
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
+                <div style={{ width: "28px", height: "28px", border: "1px solid var(--surface-border)", borderRadius: "5px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Shield size={13} style={{ color: "var(--color-primary)" }} />
                 </div>
-                <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", color: "#fff" }}>YesYouCan Cyber Secure</span>
+                <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "16px", color: "var(--text-primary)" }}>YesYouCan Cyber Secure</span>
               </div>
-              <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", maxWidth: "320px", lineHeight: 1.7, marginBottom: "20px" }}>
+              <p style={{ fontSize: "14px", color: "var(--text-secondary)", maxWidth: "360px", lineHeight: 1.7, marginBottom: "32px" }}>
                 Integrating governance, sustainability, and cybersecurity into a unified intelligence ecosystem for the enterprises of tomorrow.
               </p>
               {/* Leadership */}
-              <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "16px" }}>
-                <p style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>Leadership</p>
-                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginBottom: "5px", fontWeight: 600 }}>Dr. Noah Darko-Adjei</p>
-                <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", marginBottom: "12px", fontFamily: "monospace" }}>Chief Executive Officer</p>
-                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginBottom: "5px", fontWeight: 600 }}>Christiana Konlan Kennedy</p>
-                <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", fontFamily: "monospace" }}>Strategic Advisor</p>
-              </div>
-              {/* Social icons */}
-              <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-                {[Globe, Users, Shield].map((Icon, i) => (
-                  <div key={i} style={{ width: "30px", height: "30px", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
-                    <Icon size={13} style={{ color: "rgba(255,255,255,0.4)" }} />
+              <div style={{ borderTop: "1px solid var(--surface-border)", paddingTop: "24px" }}>
+                <p style={{ fontFamily: "monospace", fontSize: "11px", color: "var(--color-primary)", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "16px", fontWeight: 700 }}>Leadership</p>
+                <div style={{ display: "flex", gap: "40px" }}>
+                  <div>
+                    <p style={{ fontSize: "14px", color: "var(--text-primary)", marginBottom: "4px", fontWeight: 700 }}>Dr. Noah Darko-Adjei</p>
+                    <p style={{ fontSize: "11px", color: "var(--text-muted)", fontFamily: "monospace", textTransform: "uppercase" }}>Chief Executive Officer</p>
                   </div>
-                ))}
+                  <div>
+                    <p style={{ fontSize: "14px", color: "var(--text-primary)", marginBottom: "4px", fontWeight: 700 }}>Christiana Konlan Kennedy</p>
+                    <p style={{ fontSize: "11px", color: "var(--text-muted)", fontFamily: "monospace", textTransform: "uppercase" }}>Strategic Advisor</p>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Platform links */}
             <div>
-              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "#fff", marginBottom: "18px" }}>Platform</h4>
+              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.15em", color: "var(--text-primary)", marginBottom: "24px" }}>Platform</h4>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {[
                   { label: "Infrastructure", href: "/infrastructure" },
@@ -263,9 +262,9 @@ export default function LandingPage() {
                   { label: "Cyber Suite", href: "/cyber-suite" },
                   { label: "AI Insights", href: "/ai-insights" },
                 ].map(item => (
-                  <li key={item.label} style={{ marginBottom: "12px" }}>
-                    <Link href={item.href} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", textDecoration: "none", fontWeight: 500 }}
-                      className="hover:text-white transition-colors">{item.label}</Link>
+                  <li key={item.label} style={{ marginBottom: "14px" }}>
+                    <Link href={item.href} style={{ fontSize: "14px", color: "var(--text-secondary)", textDecoration: "none", fontWeight: 600 }}
+                      className="hover:text-primary transition-colors">{item.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -273,7 +272,7 @@ export default function LandingPage() {
 
             {/* Enterprise links */}
             <div>
-              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "#fff", marginBottom: "18px" }}>Enterprise</h4>
+              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.15em", color: "var(--text-primary)", marginBottom: "24px" }}>Enterprise</h4>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {[
                   { label: "Solutions", href: "/solutions" },
@@ -281,9 +280,9 @@ export default function LandingPage() {
                   { label: "Sustainability", href: "/sustainability" },
                   { label: "Security", href: "/security" },
                 ].map(item => (
-                  <li key={item.label} style={{ marginBottom: "12px" }}>
-                    <Link href={item.href} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", textDecoration: "none", fontWeight: 500 }}
-                      className="hover:text-white transition-colors">{item.label}</Link>
+                  <li key={item.label} style={{ marginBottom: "14px" }}>
+                    <Link href={item.href} style={{ fontSize: "14px", color: "var(--text-secondary)", textDecoration: "none", fontWeight: 600 }}
+                      className="hover:text-primary transition-colors">{item.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -291,15 +290,15 @@ export default function LandingPage() {
           </div>
 
           {/* Footer bottom */}
-          <div style={{ paddingTop: "24px", borderTop: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
-            <p style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.05em" }}>
+          <div style={{ paddingTop: "32px", borderTop: "1px solid var(--surface-border)", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
+            <p style={{ fontFamily: "monospace", fontSize: "11px", color: "var(--text-muted)", letterSpacing: "0.05em", fontWeight: 600 }}>
               © 2025 YesYouCan Cyber Secure. All rights reserved.
             </p>
-            <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
-              <Link href="/privacy" style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.35)", textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase" }}
-                className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/terms" style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.35)", textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase" }}
-                className="hover:text-white transition-colors">Terms of Service</Link>
+            <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
+              <Link href="/privacy" style={{ fontFamily: "monospace", fontSize: "11px", color: "var(--text-muted)", textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}
+                className="hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link href="/terms" style={{ fontFamily: "monospace", fontSize: "11px", color: "var(--text-muted)", textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}
+                className="hover:text-primary transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>

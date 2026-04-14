@@ -170,18 +170,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <motion.aside
         animate={{ width: collapsed ? 64 : 240 }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
-        className="hidden md:flex flex-col flex-shrink-0 border-r relative z-20"
+        className={cn("hidden md:flex flex-col flex-shrink-0 border-r relative z-20 glass-surface")}
         style={{
-          background: "rgba(0,0,0,0.4)",
-          borderColor: "var(--surface-border)",
-          backdropFilter: "blur(16px)",
+          borderTop: "none", borderLeft: "none", borderBottom: "none",
         }}
       >
         <SidebarContent />
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute -right-3 top-20 w-6 h-6 rounded-full border flex items-center justify-center z-30 transition-colors"
-          style={{ background: "var(--surface-2)", borderColor: "var(--surface-border)", color: "var(--text-secondary)" }}
+          className="absolute -right-3 top-20 w-6 h-6 rounded-full border flex items-center justify-center z-30 transition-colors shadow-sm"
+          style={{ background: "var(--surface-1)", borderColor: "var(--surface-border)", color: "var(--text-secondary)" }}
         >
           {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
         </button>
@@ -196,8 +194,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               onClick={() => setMobileOpen(false)} />
             <motion.aside initial={{ x: -240 }} animate={{ x: 0 }} exit={{ x: -240 }}
               transition={{ duration: 0.2 }}
-              className="fixed left-0 top-0 bottom-0 w-60 z-40 md:hidden border-r"
-              style={{ background: "rgba(0,0,0,0.6)", borderColor: "var(--surface-border)", backdropFilter: "blur(18px)" }}>
+              className="fixed left-0 top-0 bottom-0 w-60 z-40 md:hidden border-r glass-surface">
               <SidebarContent />
             </motion.aside>
           </>
@@ -207,12 +204,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top bar */}
-        <header className="flex-shrink-0 h-[60px] flex items-center justify-between px-4 md:px-6 border-b"
-          style={{
-            background: "rgba(0,0,0,0.3)",
-            borderColor: "var(--surface-border)",
-            backdropFilter: "blur(12px)",
-          }}>
+        <header className="flex-shrink-0 h-[60px] flex items-center justify-between px-4 md:px-6 border-b glass-surface"
+          style={{ borderTop: "none", borderLeft: "none", borderRight: "none" }}>
           <div className="flex items-center gap-3">
             <button className="md:hidden p-2 rounded-lg" style={{ color: "var(--text-secondary)" }}
               onClick={() => setMobileOpen(true)}>
