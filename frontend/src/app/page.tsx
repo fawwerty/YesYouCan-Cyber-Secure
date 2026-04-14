@@ -68,7 +68,7 @@ export default function LandingPage() {
             <motion.p variants={fadeIn} style={{ fontFamily: "monospace", fontSize: "11px", color: "#fff", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "20px", opacity: 0.6 }}>
               Enterprise GRC & ESG Platform
             </motion.p>
-            <motion.h1 variants={fadeIn} style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(2.4rem, 5vw, 4rem)", lineHeight: 1.1, marginBottom: "20px", color: "#ffffff", letterSpacing: "-0.02em" }}>
+            <motion.h1 variants={fadeIn} style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(2.6rem, 5.5vw, 4.2rem)", lineHeight: 1.08, marginBottom: "20px", color: "#ffffff", letterSpacing: "-0.04em" }}>
               The Science of Sustain and Secure.
             </motion.h1>
             <motion.p variants={fadeIn} style={{ fontSize: "15px", color: "rgba(255,255,255,0.6)", maxWidth: "560px", lineHeight: 1.8, marginBottom: "36px" }}>
