@@ -165,15 +165,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className={cn("flex h-screen overflow-hidden", theme === "light" && "light")} style={{ background: "var(--surface-base)" }}>
+    <div className={cn("flex h-screen overflow-hidden", theme === "light" && "light")} style={{ background: "transparent" }}>
       {/* Desktop Sidebar */}
       <motion.aside
         animate={{ width: collapsed ? 64 : 240 }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
         className="hidden md:flex flex-col flex-shrink-0 border-r relative z-20"
         style={{
-          background: "var(--surface-1)",
+          background: "rgba(0,0,0,0.4)",
           borderColor: "var(--surface-border)",
+          backdropFilter: "blur(16px)",
         }}
       >
         <SidebarContent />
@@ -196,7 +197,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <motion.aside initial={{ x: -240 }} animate={{ x: 0 }} exit={{ x: -240 }}
               transition={{ duration: 0.2 }}
               className="fixed left-0 top-0 bottom-0 w-60 z-40 md:hidden border-r"
-              style={{ background: "var(--surface-1)", borderColor: "var(--surface-border)" }}>
+              style={{ background: "rgba(0,0,0,0.6)", borderColor: "var(--surface-border)", backdropFilter: "blur(18px)" }}>
               <SidebarContent />
             </motion.aside>
           </>
@@ -208,9 +209,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {/* Top bar */}
         <header className="flex-shrink-0 h-[60px] flex items-center justify-between px-4 md:px-6 border-b"
           style={{
-            background: "var(--surface-1)",
+            background: "rgba(0,0,0,0.3)",
             borderColor: "var(--surface-border)",
-            backdropFilter: "blur(8px)",
+            backdropFilter: "blur(12px)",
           }}>
           <div className="flex items-center gap-3">
             <button className="md:hidden p-2 rounded-lg" style={{ color: "var(--text-secondary)" }}
@@ -238,7 +239,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
             {/* Live status */}
             <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg"
-              style={{ background: "var(--surface-2)", border: "1px solid var(--surface-border)" }}>
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--surface-border)" }}>
               <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "var(--accent-green)" }} />
               <span className="font-mono text-xs" style={{ color: "var(--text-muted)" }}>LIVE</span>
             </div>
@@ -247,7 +248,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <div className="relative">
               <button onClick={() => setNotifOpen(!notifOpen)}
                 className="relative p-2 rounded-lg transition-colors"
-                style={{ background: "var(--surface-2)", color: "var(--text-secondary)" }}>
+                style={{ background: "rgba(255,255,255,0.03)", color: "var(--text-secondary)" }}>
                 <Bell size={16} />
                 {notifications.length > 0 && (
                   <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full text-xs flex items-center justify-center font-mono"
@@ -260,7 +261,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 {notifOpen && (
                   <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
                     className="absolute right-0 top-10 w-72 rounded-xl overflow-hidden z-50 shadow-2xl"
-                    style={{ background: "var(--surface-card)", border: "1px solid var(--surface-border)" }}>
+                    style={{ background: "rgba(0,0,0,0.85)", border: "1px solid var(--surface-border)", backdropFilter: "blur(20px)" }}>
                     <div className="px-4 py-3 border-b flex items-center justify-between"
                       style={{ borderColor: "var(--surface-border)" }}>
                       <span className="font-display font-semibold text-sm text-white">Notifications</span>
@@ -291,7 +292,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto" style={{ background: "var(--navy-950)" }}>
+        <main className="flex-1 overflow-y-auto" style={{ background: "transparent" }}>
           <motion.div
             key={pathname}
             initial={{ opacity: 0, y: 8 }}

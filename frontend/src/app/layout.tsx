@@ -3,6 +3,7 @@ import { Inter, DM_Mono } from "next/font/google";
 import "../styles/globals.css";
 import { Toaster } from "react-hot-toast";
 
+import Image from "next/image";
 import ThemeRegistry from "../components/ThemeRegistry";
 
 // Inter — all weights for both display and body (Kudi-style unified font)
@@ -29,7 +30,21 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${dmMono.variable}`}>
-      <body style={{ fontFamily: "var(--font-display)" }}>
+      <body style={{ fontFamily: "var(--font-display)", position: "relative", minHeight: "100vh" }}>
+        
+        {/* GLOBAL PREMIUM SOC BACKGROUND (Universal persistence) */}
+        <div style={{ position: "fixed", inset: 0, zIndex: -1 }}>
+          <Image 
+            src="/assets/hero-soc-modern.png" 
+            alt="Security Operations Center background" 
+            fill 
+            style={{ objectFit: "cover", opacity: 0.9 }} 
+            priority 
+          />
+          {/* Universal high-contrast overlay */}
+          <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
+        </div>
+
         <ThemeRegistry>
           {children}
         </ThemeRegistry>

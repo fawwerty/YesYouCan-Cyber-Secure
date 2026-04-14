@@ -29,18 +29,7 @@ export default function LoginPage() {
   return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "#000" }}>
       
-      {/* Cinematic background */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-        <Image
-          src="/assets/hero-soc-modern.png"
-          alt="Background"
-          fill
-          style={{ objectFit: "cover" }}
-          priority
-        />
-        {/* Gradient overlay for readability */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.85) 100%)" }} />
-      </div>
+      {/* Cinematic background context is now managed globally in RootLayout */}
 
       {/* Form container */}
       <div style={{ width: "100%", maxWidth: "400px", padding: "0 24px", position: "relative", zIndex: 10 }}>
