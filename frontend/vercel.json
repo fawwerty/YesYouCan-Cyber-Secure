@@ -2,7 +2,6 @@
   "version": 2,
   "public": true,
   "name": "yyc-frontend",
-  "rootDir": "frontend",
   "framework": "nextjs",
   "installCommand": "npm install",
   "buildCommand": "npm run build"
