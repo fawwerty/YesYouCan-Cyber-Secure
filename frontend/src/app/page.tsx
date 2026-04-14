@@ -3,64 +3,58 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Shield, Leaf, Zap, Globe, Lock, ArrowRight,
-  ChevronRight, CheckCircle2, Award, Users, BarChart3
-} from "lucide-react";
+import { Shield, Leaf, Globe, Lock, ArrowRight, ChevronRight, CheckCircle2, Award, Users, Zap } from "lucide-react";
 
 const fadeIn = {
-  initial: { opacity: 0, y: 16 },
+  initial: { opacity: 0, y: 14 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.5 }
 };
-
-const stagger = {
-  animate: { transition: { staggerChildren: 0.08 } }
-};
+const stagger = { animate: { transition: { staggerChildren: 0.08 } } };
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen text-white overflow-x-hidden relative" style={{ fontFamily: "var(--font-body)" }}>
+    <div style={{ minHeight: "100vh", color: "#fff", overflowX: "hidden", position: "relative", fontFamily: "var(--font-body)" }}>
 
-      {/* Full-page background */}
-      <div className="fixed inset-0 z-0">
-        <Image
-          src="/assets/site-bg.png"
-          alt="Background"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/70" />
+      {/* ── COLORFUL MINIMALIST BACKGROUND ── */}
+      <div style={{ position: "fixed", inset: 0, zIndex: 0 }}>
+        <Image src="/assets/site-bg.png" alt="" fill style={{ objectFit: "cover" }} priority />
+        {/* Dark overlay to ensure text readability — no words bleed through */}
+        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.78)" }} />
       </div>
 
-      {/* ── HEADER ── */}
-      <header className="fixed top-0 inset-x-0 z-50 border-b border-white/10" style={{ background: "rgba(0,0,0,0.92)", backdropFilter: "blur(12px)" }}>
-        <div className="max-w-screen-2xl mx-auto px-8 h-16 flex items-center justify-between">
-          {/* Brand */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-md flex items-center justify-center iridescent-bg flex-shrink-0">
-              <Shield size={16} className="text-black" />
+      {/* ── HEADER — Full width, tall, traditional, no rounded border ── */}
+      <header style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+        background: "rgba(0,0,0,0.95)",
+        borderBottom: "1px solid rgba(255,255,255,0.1)",
+        backdropFilter: "blur(12px)",
+      }}>
+        <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px", height: "68px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          {/* Brand — minimalist, white only */}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div style={{ width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(255,255,255,0.3)", borderRadius: "6px" }}>
+              <Shield size={16} style={{ color: "#fff" }} />
             </div>
             <div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", lineHeight: 1 }}>YesYouCan</div>
-              <div style={{ fontFamily: "monospace", fontSize: "9px", color: "var(--accent-green)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase" }}>Cyber Secure</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", color: "#fff", lineHeight: 1 }}>YesYouCan</div>
+              <div style={{ fontSize: "9px", color: "#fff", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase", fontFamily: "monospace", opacity: 0.7 }}>Cyber Secure</div>
             </div>
           </div>
 
-          {/* Nav links */}
-          <nav className="hidden md:flex items-center gap-8" style={{ fontFamily: "var(--font-display)", fontSize: "13px", fontWeight: 500, color: "rgba(255,255,255,0.6)" }}>
-            <Link href="#features" className="hover:text-white transition-colors">Features</Link>
-            <Link href="#solutions" className="hover:text-white transition-colors">Solutions</Link>
-            <Link href="#about" className="hover:text-white transition-colors">About</Link>
+          {/* Nav */}
+          <nav style={{ display: "flex", alignItems: "center", gap: "36px" }}>
+            {[["Features", "#features"], ["Solutions", "/solutions"], ["About", "#about"]].map(([label, href]) => (
+              <Link key={label} href={href} style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "13px", color: "#fff", textDecoration: "none", opacity: 0.75 }}
+                className="hover:opacity-100 transition-opacity">{label}</Link>
+            ))}
           </nav>
 
-          {/* CTA */}
-          <div className="flex items-center gap-4">
-            <Link href="/auth/login" style={{ fontFamily: "var(--font-display)", fontSize: "13px", fontWeight: 500, color: "rgba(255,255,255,0.6)" }} className="hover:text-white transition-colors">
-              Sign In
-            </Link>
-            <Link href="/auth/register" className="btn-vibrant px-5 py-2 rounded-md flex items-center gap-1.5" style={{ fontFamily: "var(--font-display)", fontSize: "13px", fontWeight: 600 }}>
+          {/* CTAs */}
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <Link href="/auth/login" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "13px", color: "#fff", opacity: 0.7, textDecoration: "none" }}
+              className="hover:opacity-100 transition-opacity">Sign In</Link>
+            <Link href="/auth/register" className="btn-vibrant" style={{ padding: "9px 20px", borderRadius: "6px", display: "flex", alignItems: "center", gap: "6px", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "13px", textDecoration: "none" }}>
               Get Started <ChevronRight size={14} />
             </Link>
           </div>
@@ -68,36 +62,23 @@ export default function LandingPage() {
       </header>
 
       {/* ── HERO ── */}
-      <section className="relative pt-36 pb-24 px-8 z-10">
-        <div className="max-w-5xl mx-auto">
+      <section style={{ position: "relative", paddingTop: "140px", paddingBottom: "96px", paddingLeft: "40px", paddingRight: "40px", zIndex: 10 }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <motion.div initial="initial" animate="animate" variants={stagger}>
-            <motion.p
-              variants={fadeIn}
-              style={{ fontFamily: "monospace", fontSize: "11px", color: "var(--accent-green)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "20px" }}
-            >
+            <motion.p variants={fadeIn} style={{ fontFamily: "monospace", fontSize: "11px", color: "#fff", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "20px", opacity: 0.6 }}>
               Enterprise GRC & ESG Platform
             </motion.p>
-
-            <motion.h1
-              variants={fadeIn}
-              style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(2.4rem, 5vw, 4rem)", lineHeight: 1.1, marginBottom: "20px", color: "#fff", letterSpacing: "-0.02em" }}
-            >
+            <motion.h1 variants={fadeIn} style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(2.4rem, 5vw, 4rem)", lineHeight: 1.1, marginBottom: "20px", color: "#fff", letterSpacing: "-0.02em" }}>
               The Science of <span className="text-gradient-vibrant">Sustain</span> and <span className="text-gradient-vibrant">Secure</span>.
             </motion.h1>
-
-            <motion.p
-              variants={fadeIn}
-              style={{ fontSize: "15px", color: "rgba(255,255,255,0.55)", maxWidth: "520px", lineHeight: 1.7, marginBottom: "32px" }}
-            >
+            <motion.p variants={fadeIn} style={{ fontSize: "15px", color: "rgba(255,255,255,0.6)", maxWidth: "560px", lineHeight: 1.8, marginBottom: "36px" }}>
               Secure your infrastructure while building a sustainable future. YesYouCan integrates Cybersecurity, ESG metrics, and AI-driven compliance into one powerful ecosystem.
             </motion.p>
-
-            <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-4">
-              <Link href="/auth/register" className="btn-vibrant px-7 py-3 rounded-md flex items-center gap-2 group" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "14px" }}>
-                Start Enterprise Launch
-                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+            <motion.div variants={fadeIn} style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center" }}>
+              <Link href="/auth/register" className="btn-vibrant" style={{ padding: "12px 28px", borderRadius: "6px", display: "flex", alignItems: "center", gap: "8px", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "14px", textDecoration: "none" }}>
+                Start Enterprise Launch <ArrowRight size={16} />
               </Link>
-              <Link href="/auth/login" className="px-7 py-3 rounded-md flex items-center gap-2" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "14px", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)" }}>
+              <Link href="/auth/login" style={{ padding: "12px 28px", borderRadius: "6px", display: "flex", alignItems: "center", gap: "8px", fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "14px", textDecoration: "none", border: "1px solid rgba(255,255,255,0.2)", color: "#fff" }}>
                 Sign In
               </Link>
             </motion.div>
@@ -105,11 +86,11 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── FEATURES SECTION ── */}
-      <section id="features" className="py-20 px-8 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-14">
-            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.6rem, 3vw, 2.4rem)", marginBottom: "10px", color: "#fff", letterSpacing: "-0.02em" }}>
+      {/* ── FEATURES ── */}
+      <section id="features" style={{ padding: "80px 40px", position: "relative", zIndex: 10 }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ marginBottom: "48px" }}>
+            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: "#fff", letterSpacing: "-0.02em", marginBottom: "10px" }}>
               Engineered for Impact.
             </h2>
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "14px", maxWidth: "480px", lineHeight: 1.7 }}>
@@ -117,55 +98,46 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-5" style={{ minHeight: "420px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: "20px" }}>
             {/* Large card */}
-            <motion.div
-              whileHover={{ y: -4 }}
-              className="md:col-span-8 glass-vibrant rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-72 h-72 bg-teal-500/5 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+            <motion.div whileHover={{ y: -4 }} style={{ gridColumn: "span 8", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "16px", padding: "32px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <div>
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-5">
-                  <Shield size={20} className="text-emerald-400" />
+                <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "rgba(16,185,129,0.12)", border: "1px solid rgba(16,185,129,0.2)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
+                  <Shield size={20} style={{ color: "#10b981" }} />
                 </div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "22px", color: "#fff", marginBottom: "8px" }}>Autonomous Cyber Defense</h3>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "21px", color: "#fff", marginBottom: "10px" }}>Autonomous Cyber Defense</h3>
                 <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", maxWidth: "380px", lineHeight: 1.7 }}>
                   Our AI doesn't just monitor — it predicts. Detect vulnerabilities before they manifest with our adaptive GRC engine.
                 </p>
               </div>
-              <div className="mt-6 flex items-center gap-3">
-                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "monospace", color: "rgba(255,255,255,0.6)" }}>
-                  <CheckCircle2 size={12} className="text-emerald-400" /> ISO 27001
-                </span>
-                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "monospace", color: "rgba(255,255,255,0.6)" }}>
-                  <CheckCircle2 size={12} className="text-emerald-400" /> NIST CSF
-                </span>
+              <div style={{ marginTop: "24px", display: "flex", gap: "10px" }}>
+                {["ISO 27001", "NIST CSF", "GDPR"].map(tag => (
+                  <span key={tag} style={{ display: "flex", alignItems: "center", gap: "6px", padding: "5px 12px", borderRadius: "999px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "monospace", fontSize: "11px", color: "rgba(255,255,255,0.55)" }}>
+                    <CheckCircle2 size={11} style={{ color: "#10b981" }} /> {tag}
+                  </span>
+                ))}
               </div>
             </motion.div>
 
             {/* Small card */}
-            <motion.div
-              whileHover={{ y: -4 }}
-              className="md:col-span-4 iridescent-bg rounded-2xl p-8 flex flex-col items-center justify-center text-center"
-            >
-              <div className="w-14 h-14 rounded-full bg-black/20 flex items-center justify-center mb-4">
-                <Leaf size={28} className="text-black" />
+            <motion.div whileHover={{ y: -4 }} className="iridescent-bg" style={{ gridColumn: "span 4", borderRadius: "16px", padding: "32px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+              <div style={{ width: "52px", height: "52px", borderRadius: "50%", background: "rgba(0,0,0,0.2)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
+                <Leaf size={26} style={{ color: "#000" }} />
               </div>
-              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "18px", color: "#000", marginBottom: "6px" }}>Green Intelligence</h3>
-              <p style={{ color: "rgba(0,0,0,0.6)", fontSize: "12px", lineHeight: 1.6 }}>Automated Scope 1, 2 & 3 carbon reporting at your fingertips.</p>
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "17px", color: "#000", marginBottom: "6px" }}>Green Intelligence</h3>
+              <p style={{ color: "rgba(0,0,0,0.6)", fontSize: "12px", lineHeight: 1.6 }}>Automated Scope 1, 2 & 3 carbon reporting.</p>
             </motion.div>
 
-            {/* Bottom row */}
-            <motion.div whileHover={{ y: -4 }} className="md:col-span-4 glass-vibrant rounded-2xl p-8">
-              <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-4">
-                <Globe size={20} className="text-purple-400" />
+            {/* Bottom cards */}
+            <motion.div whileHover={{ y: -4 }} style={{ gridColumn: "span 4", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "16px", padding: "28px" }}>
+              <div style={{ width: "38px", height: "38px", borderRadius: "10px", background: "rgba(139,92,246,0.12)", border: "1px solid rgba(139,92,246,0.2)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
+                <Globe size={18} style={{ color: "#a78bfa" }} />
               </div>
-              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "17px", color: "#fff", marginBottom: "6px" }}>Global Governance</h3>
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "16px", color: "#fff", marginBottom: "6px" }}>Global Governance</h3>
               <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px", lineHeight: 1.6 }}>Multi-tenant, multi-region compliance management simplified.</p>
             </motion.div>
 
-            <motion.div whileHover={{ y: -4 }} className="md:col-span-8 glass-vibrant rounded-2xl p-8 flex flex-col justify-end relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/10 to-purple-900/10 pointer-events-none" />
+            <motion.div whileHover={{ y: -4 }} style={{ gridColumn: "span 8", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "16px", padding: "28px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
               <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "17px", color: "#fff", marginBottom: "6px" }}>Pro Max Analytics</h3>
               <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px", maxWidth: "360px", lineHeight: 1.6 }}>Every data point visualized. Every risk quantified. Real-time insights that actually lead to action.</p>
             </motion.div>
@@ -173,52 +145,48 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── SOCIAL PROOF ── */}
-      <section className="py-14 px-8 border-y border-white/5 relative z-10">
-        <div className="max-w-5xl mx-auto flex flex-col items-center gap-8 text-center">
-          <p style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Trusted by innovators globally</p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-30 hover:opacity-60 transition-opacity duration-500">
+      {/* ── TRUSTED BY ── */}
+      <section style={{ padding: "56px 40px", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", position: "relative", zIndex: 10 }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto", textAlign: "center" }}>
+          <p style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "28px" }}>Trusted by innovators globally</p>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "48px", opacity: 0.3 }}>
             {["ORACLE", "VELOCITY", "STRIPE", "MERCURY", "LINEAR"].map(label => (
-              <span key={label} style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", letterSpacing: "-0.04em" }}>{label}</span>
+              <span key={label} style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", letterSpacing: "-0.04em", color: "#fff" }}>{label}</span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA / IMPACT SECTION ── */}
-      <section id="solutions" className="py-20 px-8 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* ── VISION / CTA SECTION ── */}
+      <section id="solutions" style={{ padding: "80px 40px", position: "relative", zIndex: 10 }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-vibrant rounded-2xl p-12 relative overflow-hidden"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "16px", padding: "56px 48px", position: "relative", overflow: "hidden", textAlign: "center" }}
           >
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
-
-            <p style={{ fontFamily: "monospace", fontSize: "10px", color: "var(--accent-green)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "16px" }}>Ready to scale</p>
-            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", color: "#fff", lineHeight: 1.15, marginBottom: "14px", letterSpacing: "-0.02em" }}>
-              Ready to redefine <span className="text-gradient-vibrant">possibility?</span>
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(to right, transparent, rgba(16,185,129,0.4), transparent)" }} />
+            <p style={{ fontFamily: "monospace", fontSize: "10px", color: "#10b981", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "16px" }}>Our Vision</p>
+            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", color: "#fff", lineHeight: 1.2, marginBottom: "16px", letterSpacing: "-0.02em" }}>
+              Where Security Meets Sustainability
             </h2>
-            <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", marginBottom: "28px", maxWidth: "420px", margin: "0 auto 28px", lineHeight: 1.7 }}>
-              Join the elite league of enterprises prioritizing both cyber excellence and environmental stewardship.
+            <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.55)", maxWidth: "540px", margin: "0 auto 28px", lineHeight: 1.8 }}>
+              We believe that the organizations that will lead the next decade are those that treat cybersecurity and sustainability not as compliance burdens, but as competitive advantages. YesYouCan exists to give every organization — regardless of size — the intelligence to do both, exceptionally well.
             </p>
-            <Link href="/auth/register" className="btn-vibrant px-8 py-3 rounded-md inline-flex items-center gap-2" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "14px" }}>
-              Deploy Your Instance <ArrowRight size={16} />
+            <Link href="/auth/register" className="btn-vibrant" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "12px 28px", borderRadius: "6px", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "14px", textDecoration: "none" }}>
+              Join Our Mission <ArrowRight size={16} />
             </Link>
-
-            <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div style={{ marginTop: "40px", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "16px", maxWidth: "500px", margin: "40px auto 0" }}>
               {[
-                { label: "SOC2 Type II", icon: <Lock size={14} /> },
-                { label: "HIPAA Compliant", icon: <Shield size={14} /> },
-                { label: "ESG Gold Standard", icon: <Award size={14} /> },
-                { label: "99.99% Uptime", icon: <Zap size={14} /> },
+                { label: "SOC2 Type II", icon: <Lock size={13} /> },
+                { label: "HIPAA Compliant", icon: <Shield size={13} /> },
+                { label: "ESG Gold Standard", icon: <Award size={13} /> },
+                { label: "99.99% Uptime", icon: <Zap size={13} /> },
               ].map(badge => (
-                <div key={badge.label} className="flex flex-col items-center gap-2">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }}>
-                    {badge.icon}
-                  </div>
-                  <span style={{ fontSize: "9px", textTransform: "uppercase", fontFamily: "monospace", letterSpacing: "0.1em", color: "rgba(255,255,255,0.35)" }}>{badge.label}</span>
+                <div key={badge.label} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 14px", borderRadius: "8px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <span style={{ color: "rgba(255,255,255,0.4)" }}>{badge.icon}</span>
+                  <span style={{ fontFamily: "monospace", fontSize: "11px", color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em" }}>{badge.label}</span>
                 </div>
               ))}
             </div>
@@ -226,42 +194,52 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer id="about" className="py-16 px-8 border-t border-white/10 relative z-10" style={{ background: "rgba(0,0,0,0.92)" }}>
-        <div className="max-w-screen-2xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            {/* Brand */}
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-7 h-7 rounded-md iridescent-bg flex items-center justify-center">
-                  <Shield size={14} className="text-black" />
+      {/* ── FOOTER — Full width, no rounded border, matches header ── */}
+      <footer id="about" style={{ borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.95)", position: "relative", zIndex: 10, padding: "64px 40px 32px" }}>
+        <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: "60px", marginBottom: "48px" }}>
+            {/* Brand + Leadership */}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+                <div style={{ width: "28px", height: "28px", border: "1px solid rgba(255,255,255,0.3)", borderRadius: "5px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Shield size={13} style={{ color: "#fff" }} />
                 </div>
-                <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px" }}>YesYouCan Cyber Secure</span>
+                <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", color: "#fff" }}>YesYouCan Cyber Secure</span>
               </div>
-              <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", maxWidth: "320px", lineHeight: 1.7, marginBottom: "16px" }}>
-                Integrating governance, sustainability, and cybersecurity into a unified intelligence ecosystem.
+              <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", maxWidth: "320px", lineHeight: 1.7, marginBottom: "20px" }}>
+                Integrating governance, sustainability, and cybersecurity into a unified intelligence ecosystem for the enterprises of tomorrow.
               </p>
-              <div className="flex gap-3">
-                <div className="w-7 h-7 rounded-md glass-vibrant flex items-center justify-center hover:border-emerald-500/40 cursor-pointer transition-colors"><Globe size={12} /></div>
-                <div className="w-7 h-7 rounded-md glass-vibrant flex items-center justify-center hover:border-emerald-500/40 cursor-pointer transition-colors"><Users size={12} /></div>
-                <div className="w-7 h-7 rounded-md glass-vibrant flex items-center justify-center hover:border-emerald-500/40 cursor-pointer transition-colors"><Shield size={12} /></div>
+              {/* Leadership */}
+              <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "16px" }}>
+                <p style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>Leadership</p>
+                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginBottom: "5px", fontWeight: 600 }}>Dr. Noah Darko-Adjei</p>
+                <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", marginBottom: "12px", fontFamily: "monospace" }}>Chief Executive Officer</p>
+                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginBottom: "5px", fontWeight: 600 }}>Christiana Konlan Kennedy</p>
+                <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", fontFamily: "monospace" }}>Strategic Advisor</p>
+              </div>
+              {/* Social icons */}
+              <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
+                {[Globe, Users, Shield].map((Icon, i) => (
+                  <div key={i} style={{ width: "30px", height: "30px", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+                    <Icon size={13} style={{ color: "rgba(255,255,255,0.4)" }} />
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Platform links */}
             <div>
-              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "rgba(255,255,255,0.5)", marginBottom: "16px" }}>Platform</h4>
-              <ul className="space-y-3">
+              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "#fff", marginBottom: "18px" }}>Platform</h4>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {[
-                  { label: "Infrastructure", href: "/dashboard" },
+                  { label: "Infrastructure", href: "/infrastructure" },
                   { label: "ESG Reporting", href: "/esg" },
-                  { label: "Cyber Suite", href: "/risks" },
-                  { label: "AI Insights", href: "/dashboard" },
+                  { label: "Cyber Suite", href: "/cyber-suite" },
+                  { label: "AI Insights", href: "/ai-insights" },
                 ].map(item => (
-                  <li key={item.label}>
-                    <Link href={item.href} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", fontWeight: 500 }} className="hover:text-emerald-400 transition-colors">
-                      {item.label}
-                    </Link>
+                  <li key={item.label} style={{ marginBottom: "12px" }}>
+                    <Link href={item.href} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", textDecoration: "none", fontWeight: 500 }}
+                      className="hover:text-white transition-colors">{item.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -269,18 +247,17 @@ export default function LandingPage() {
 
             {/* Enterprise links */}
             <div>
-              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "rgba(255,255,255,0.5)", marginBottom: "16px" }}>Enterprise</h4>
-              <ul className="space-y-3">
+              <h4 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "#fff", marginBottom: "18px" }}>Enterprise</h4>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {[
-                  { label: "Solutions", href: "#solutions" },
-                  { label: "Governance", href: "/admin" },
-                  { label: "Sustainability", href: "/esg" },
-                  { label: "Security", href: "/risks" },
+                  { label: "Solutions", href: "/solutions" },
+                  { label: "Governance", href: "/governance" },
+                  { label: "Sustainability", href: "/sustainability" },
+                  { label: "Security", href: "/security" },
                 ].map(item => (
-                  <li key={item.label}>
-                    <Link href={item.href} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", fontWeight: 500 }} className="hover:text-emerald-400 transition-colors">
-                      {item.label}
-                    </Link>
+                  <li key={item.label} style={{ marginBottom: "12px" }}>
+                    <Link href={item.href} style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", textDecoration: "none", fontWeight: 500 }}
+                      className="hover:text-white transition-colors">{item.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -288,17 +265,15 @@ export default function LandingPage() {
           </div>
 
           {/* Footer bottom */}
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div style={{ paddingTop: "24px", borderTop: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
             <p style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.05em" }}>
               © 2025 YesYouCan Cyber Secure. All rights reserved.
             </p>
-            <div className="flex items-center gap-6">
-              <Link href="/privacy" style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em", textTransform: "uppercase" }} className="hover:text-white transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em", textTransform: "uppercase" }} className="hover:text-white transition-colors">
-                Terms of Service
-              </Link>
+            <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
+              <Link href="/privacy" style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.35)", textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase" }}
+                className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms" style={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(255,255,255,0.35)", textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase" }}
+                className="hover:text-white transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>
