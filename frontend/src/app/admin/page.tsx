@@ -14,6 +14,9 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isAddingUser, setIsAddingUser] = useState(false);
+  const [newUser, setNewUser] = useState({ firstName: "", lastName: "", email: "", password: "", role: "employee" });
+  const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -53,6 +56,27 @@ export default function AdminPage() {
     }
   };
 
+  const handleAddUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsCreating(true);
+    try {
+      if (newUser.password.length < 8) {
+        toast.error("Password must be at least 8 characters");
+        setIsCreating(false);
+        return;
+      }
+      await api.post("/users", newUser);
+      toast.success("User successfully onboarded");
+      setIsAddingUser(false);
+      setNewUser({ firstName: "", lastName: "", email: "", password: "", role: "employee" });
+      fetchUsers();
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || "Failed to create user");
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
   const togglePermission = (perm: string) => {
     setSelectedUser((prev: any) => {
       const perms = [...(prev.permissions || [])];
@@ -89,7 +113,7 @@ export default function AdminPage() {
         <div className="glass-card rounded-2xl overflow-hidden">
           <div className="px-6 py-4 border-b flex items-center justify-between" style={{borderColor:"var(--surface-border)"}}>
             <h3 className="font-display font-semibold text-white">Identity Management (RBAC/MAC/DAC)</h3>
-            <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--accent-green)] text-black text-xs font-bold">
+            <button onClick={() => setIsAddingUser(true)} className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--accent-green)] text-black text-xs font-bold transition-all hover:brightness-110">
               <UserPlus size={14}/> Add User
             </button>
           </div>
@@ -238,6 +262,62 @@ export default function AdminPage() {
                   <button type="submit" disabled={isUpdating} className="flex-1 py-3 rounded-xl font-bold text-sm bg-[var(--accent-green)] text-black hover:brightness-110 transition-all flex items-center justify-center gap-2">
                     {isUpdating ? <div className="w-4 h-4 border-2 border-black border-t-transparent animate-spin rounded-full"/> : <ShieldAlert size={16}/>}
                     Commit Changes
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ADD USER MODAL */}
+      <AnimatePresence>
+        {isAddingUser && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsAddingUser(false)} />
+            <motion.div initial={{opacity:0, scale: 0.95}} animate={{opacity:1, scale: 1}} exit={{opacity:0, scale: 0.95}} 
+              className="relative w-full max-w-lg glass-card rounded-2xl overflow-hidden shadow-2xl">
+              <div className="p-6 border-b" style={{borderColor:"var(--surface-border)"}}>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-display font-bold text-xl text-white">Provision Account</h3>
+                  <button onClick={() => setIsAddingUser(false)} className="text-[var(--text-muted)] hover:text-white transition-colors"><X size={20}/></button>
+                </div>
+                <p className="text-sm" style={{color:"var(--text-secondary)"}}>Grant enterprise access to a new user.</p>
+              </div>
+              
+              <form onSubmit={handleAddUser} className="p-6 space-y-5">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="label mb-2 block">First Name</label>
+                    <input type="text" required value={newUser.firstName} onChange={e => setNewUser({...newUser, firstName: e.target.value})} className="input-field" placeholder="Jane" />
+                  </div>
+                  <div>
+                    <label className="label mb-2 block">Last Name</label>
+                    <input type="text" required value={newUser.lastName} onChange={e => setNewUser({...newUser, lastName: e.target.value})} className="input-field" placeholder="Smith" />
+                  </div>
+                </div>
+                <div>
+                  <label className="label mb-2 block">Corporate Email</label>
+                  <input type="email" required value={newUser.email} onChange={e => setNewUser({...newUser, email: e.target.value})} className="input-field" placeholder="name@organization.com" />
+                </div>
+                <div>
+                  <label className="label mb-2 block">Initial Passphrase</label>
+                  <input type="text" required value={newUser.password} onChange={e => setNewUser({...newUser, password: e.target.value})} className="input-field" placeholder="Min. 8 characters" minLength={8} />
+                </div>
+                <div>
+                  <label className="label mb-2 block">Base Enterprise Role</label>
+                  <select value={newUser.role} onChange={e => setNewUser({...newUser, role: e.target.value})} className="input-field">
+                    {Object.entries(ROLE_LABELS).map(([val, lbl]) => (
+                      <option key={val} value={val}>{lbl}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="pt-4 flex gap-3">
+                  <button type="button" onClick={() => setIsAddingUser(false)} className="flex-1 py-3 rounded-xl font-bold text-sm bg-transparent border border-[var(--surface-border)] text-[var(--text-secondary)] hover:text-white transition-colors">Cancel</button>
+                  <button type="submit" disabled={isCreating} className="flex-1 py-3 rounded-xl font-bold text-sm bg-[var(--accent-green)] text-black hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                    {isCreating ? <div className="w-4 h-4 border-2 border-black border-t-transparent animate-spin rounded-full"/> : <UserPlus size={16}/>}
+                    Create Identity
                   </button>
                 </div>
               </form>

@@ -10,6 +10,27 @@ router.get("/", authenticate, authorize("super_admin", "admin"), async (req, res
   } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 });
 
+router.post("/", authenticate, authorize("super_admin", "admin"), async (req, res) => {
+  try {
+    const { email, password, firstName, lastName, role, clearanceLevel } = req.body;
+    
+    const existing = await User.findOne({ email, tenant_id: req.tenantId });
+    if (existing) return res.status(409).json({ success: false, message: "Email already registered in this tenant" });
+
+    const user = await User.create({
+      tenant_id: req.tenantId,
+      email,
+      password,
+      firstName,
+      lastName,
+      role: role || "employee",
+      clearanceLevel: clearanceLevel || 1
+    });
+
+    res.status(201).json({ success: true, data: user });
+  } catch (err) { res.status(400).json({ success: false, message: err.message }); }
+});
+
 router.put("/:id", authenticate, async (req, res) => {
   try {
     if (req.user._id.toString() !== req.params.id && !["super_admin", "admin"].includes(req.user.role)) {

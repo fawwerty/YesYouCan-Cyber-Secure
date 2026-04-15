@@ -153,7 +153,7 @@ export default function LandingPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
               >
-                <div className="glass-surface group" style={{ borderRadius: "24px", padding: "32px", height: "100%", transition: "transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.2s" }}>
+                <div className="glass-surface group card-hover" style={{ borderRadius: "24px", padding: "32px", height: "100%", transition: "transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.2s, box-shadow 0.2s" }}>
                   <div style={{ width: "48px", height: "48px", borderRadius: "14px", background: `rgba(${parseInt(item.color.slice(1,3),16)}, ${parseInt(item.color.slice(3,5),16)}, ${parseInt(item.color.slice(5,7),16)}, 0.1)`, border: `1px solid ${item.color}40`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "24px", color: item.color }}>
                     {item.icon}
                   </div>

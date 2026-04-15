@@ -1,5 +1,5 @@
 import jsPDF from "jspdf";
-import "jspdf-autotable";
+import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { format } from "date-fns";
 
@@ -36,7 +36,7 @@ export const generatePDF = (data: ReportData) => {
   doc.text(`Category: ${data.category}`, 14, 46);
 
   // Table
-  doc.autoTable({
+  autoTable(doc, {
     startY: 55,
     head: [data.columns],
     body: data.rows,

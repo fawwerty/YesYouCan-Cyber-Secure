@@ -41,12 +41,12 @@ const seed = async () => {
   // --- Users ---
   const hashedPw = await bcrypt.hash("Password123!", 12);
   const [superAdmin, admin, analyst, executive, employee1, employee2] = await User.insertMany([
-    { tenant_id: tenant._id, email: "superadmin@yesyoucan.com", password: hashedPw, firstName: "Noah", lastName: "Darko-Adjei", role: "super_admin", department: "Executive" },
-    { tenant_id: tenant._id, email: "admin@yesyoucan.com", password: hashedPw, firstName: "Christiana", lastName: "Kennedy", role: "admin", department: "Strategy" },
-    { tenant_id: tenant._id, email: "analyst@yesyoucan.com", password: hashedPw, firstName: "Kwame", lastName: "Mensah", role: "analyst", department: "GRC" },
-    { tenant_id: tenant._id, email: "executive@yesyoucan.com", password: hashedPw, firstName: "Ama", lastName: "Asante", role: "executive", department: "C-Suite" },
-    { tenant_id: tenant._id, email: "employee1@yesyoucan.com", password: hashedPw, firstName: "Kofi", lastName: "Boateng", role: "employee", department: "Engineering" },
-    { tenant_id: tenant._id, email: "employee2@yesyoucan.com", password: hashedPw, firstName: "Abena", lastName: "Owusu", role: "employee", department: "Operations" },
+    { tenant_id: tenant._id, email: "ceo@yesyoucan.com", password: hashedPw, firstName: "Noah", lastName: "Darko-Adjei", role: "super_admin", department: "Executive" },
+    { tenant_id: tenant._id, email: "strategy@yesyoucan.com", password: hashedPw, firstName: "Christiana", lastName: "Konlan Kennedy", role: "admin", department: "Strategy" },
+    { tenant_id: tenant._id, email: "grc@yesyoucan.com", password: hashedPw, firstName: "Kwame", lastName: "Mensah", role: "analyst", department: "GRC" },
+    { tenant_id: tenant._id, email: "exec@yesyoucan.com", password: hashedPw, firstName: "Ama", lastName: "Asante", role: "executive", department: "C-Suite" },
+    { tenant_id: tenant._id, email: "eng@yesyoucan.com", password: hashedPw, firstName: "Kofi", lastName: "Boateng", role: "employee", department: "Engineering" },
+    { tenant_id: tenant._id, email: "ops@yesyoucan.com", password: hashedPw, firstName: "Abena", lastName: "Owusu", role: "employee", department: "Operations" },
   ]);
   console.log("👥 Users created");
 
@@ -214,11 +214,12 @@ const seed = async () => {
   console.log("   SEED COMPLETE — YesYouCan Cyber Secure");
   console.log("============================================");
   console.log("\n📧 TEST ACCOUNTS:");
-  console.log("   superadmin@yesyoucan.com  | Password123!");
-  console.log("   admin@yesyoucan.com       | Password123!");
-  console.log("   analyst@yesyoucan.com     | Password123!");
-  console.log("   executive@yesyoucan.com   | Password123!");
-  console.log("   employee1@yesyoucan.com   | Password123!");
+  console.log("   ceo@yesyoucan.com         | Password123!");
+  console.log("   strategy@yesyoucan.com    | Password123!");
+  console.log("   grc@yesyoucan.com         | Password123!");
+  console.log("   exec@yesyoucan.com        | Password123!");
+  console.log("   eng@yesyoucan.com         | Password123!");
+  console.log("   ops@yesyoucan.com         | Password123!");
   console.log("============================================\n");
 
   await mongoose.disconnect();

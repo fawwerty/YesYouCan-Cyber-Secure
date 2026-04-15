@@ -36,9 +36,9 @@ html {
   --surface-border:   rgba(255, 255, 255, 0.08);
   --surface-border-2: rgba(255, 255, 255, 0.14);
 
-  --text-primary:     #FFFFFF;
+  --text-primary:     #E4E4E7; /* Lower white for reduced eye strain / visual aid */
   --text-secondary:   #A1A1AA;
-  --text-muted:       #52525B;
+  --text-muted:       #71717A; /* Slightly brighter muted text for contrast in dark mode */
 
   /* Backward compat */
   --navy-950:         var(--surface-base);
@@ -66,6 +66,16 @@ html {
   --surface:          var(--surface-base);
   --surface-elevated: var(--surface-1);
   --surface-card:     var(--surface-1);
+}
+
+/* --- Hero SOC Background --- */
+.hero-soc-bg {
+  background: radial-gradient(circle at 50% -20%, rgba(0, 255, 148, 0.15) 0%, var(--surface-base) 60%);
+  background-attachment: fixed;
+}
+:root.light .hero-soc-bg {
+  background: radial-gradient(circle at 50% -20%, rgba(16, 185, 129, 0.1) 0%, var(--surface-base) 60%);
+  background-attachment: fixed;
 }
 
 /* ─── Base Reset ─────────────────────────────────────────────────────────────── */

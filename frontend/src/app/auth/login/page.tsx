@@ -27,7 +27,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", color: "var(--text-primary)", padding: "120px 40px 80px", maxWidth: "1200px", margin: "0 auto", fontFamily: "var(--font-body)", position: "relative" }}>
+    <div className="hero-soc-bg" style={{ minHeight: "100vh", position: "relative" }}>
+      <div style={{ color: "var(--text-primary)", padding: "120px 40px 80px", maxWidth: "1200px", margin: "0 auto", fontFamily: "var(--font-body)", position: "relative" }}>
       
       {/* Back Navigation */}
       <Link href="/" style={{ position: "absolute", top: "40px", left: "40px", display: "flex", alignItems: "center", gap: "8px", color: "var(--color-primary)", textDecoration: "none", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }} className="hover:opacity-70 transition-opacity">
@@ -152,6 +153,7 @@ export default function LoginPage() {
           </div>
         </motion.div>
       </div>
+    </div>
     </div>
   );
 }
