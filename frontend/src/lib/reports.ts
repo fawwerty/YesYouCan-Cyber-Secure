@@ -41,7 +41,7 @@ export const generatePDF = (data: ReportData) => {
     head: [data.columns],
     body: data.rows,
     theme: "grid",
-    headStyles: { fillStyle: "content", fillColor: [16, 185, 129], textColor: [255, 255, 255] },
+    headStyles: { fillColor: [16, 185, 129], textColor: [255, 255, 255] },
     alternateRowStyles: { fillColor: [249, 250, 251] },
     margin: { top: 55 },
   });
