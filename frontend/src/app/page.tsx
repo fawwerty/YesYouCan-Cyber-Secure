@@ -40,7 +40,7 @@ export default function LandingPage() {
             </div>
             <div>
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "15px", color: "var(--text-primary)", lineHeight: 1 }}>YesYouCan</div>
-              <div style={{ fontSize: "9px", color: "var(--color-primary)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase", fontFamily: "monospace", fontWeight: 700 }}>Cyber Secure</div>
+              <div style={{ fontSize: "9px", color: mounted && theme === "light" ? "#000" : "var(--color-primary)", letterSpacing: "0.15em", marginTop: "2px", textTransform: "uppercase", fontFamily: "monospace", fontWeight: 800 }}>Cyber Secure</div>
             </div>
           </div>
 
@@ -81,17 +81,12 @@ export default function LandingPage() {
       }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
           <motion.div initial="initial" animate="animate" variants={stagger}>
-            <motion.div variants={fadeIn} style={{ display: "inline-flex", alignItems: "center", gap: "10px", padding: "6px 14px", borderRadius: "20px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", marginBottom: "32px" }}>
-              <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--color-primary)", boxShadow: "0 0 10px var(--color-primary)" }} />
-              <span style={{ fontFamily: "monospace", fontSize: "10px", color: "var(--text-primary)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                Quantum-Ready GRC & ESG Framework
-              </span>
-            </motion.div>
+<div style={{ height: "40px" }} />
             
             <motion.h1 
               variants={fadeIn} 
               className="text-depth-hero"
-              style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)", maxWidth: "1000px", marginBottom: "32px", color: "#fff", lineHeight: 1.1 }}
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", maxWidth: "1000px", marginBottom: "32px", color: "#fff", lineHeight: 1.15 }}
             >
               The Science of <br />Sustainability & Security.
             </motion.h1>
@@ -99,7 +94,7 @@ export default function LandingPage() {
             <motion.p 
               variants={fadeIn} 
               className="text-depth-body"
-              style={{ fontSize: "18px", color: "var(--text-secondary)", maxWidth: "620px", marginBottom: "48px", lineHeight: 1.6 }}
+              style={{ fontSize: "18px", color: "#fff", maxWidth: "620px", marginBottom: "48px", lineHeight: 1.6, fontWeight: 600 }}
             >
               Integrate organizational intelligence with automated governance. YesYouCan orchestrates complex cybersecurity protocols and ESG metrics into a unified, auditable ecosystem.
             </motion.p>
@@ -175,9 +170,9 @@ export default function LandingPage() {
                 <div className="iridescent-bg" style={{ width: "28px", height: "28px", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Shield size={14} style={{ color: "#000" }} />
                 </div>
-                <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "16px", color: "#fff" }}>YesYouCan Cyber Secure</span>
+                <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "16px", color: "var(--text-primary)" }}>YesYouCan Cyber Secure</span>
               </div>
-              <p style={{ fontSize: "14px", color: "var(--text-secondary)", maxWidth: "380px", lineHeight: 1.7, marginBottom: "32px" }}>
+              <p style={{ fontSize: "14px", color: "var(--text-secondary)", maxWidth: "380px", lineHeight: 1.7, marginBottom: "32px", fontWeight: 500 }}>
                 Integrating governance, sustainability, and cybersecurity into a unified intelligence ecosystem for the enterprises of tomorrow.
               </p>
               <div className="flex gap-10">

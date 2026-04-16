@@ -89,8 +89,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           {!collapsed && (
             <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}
               transition={{ duration: 0.15 }}>
-              <div className="font-display font-bold text-white text-sm leading-none">YesYouCan</div>
-              <div className="font-mono text-xs mt-0.5" style={{ color: "var(--accent-green)", fontSize: 10 }}>
+              <div className="font-display font-bold text-[var(--text-primary)] text-sm leading-none">YesYouCan</div>
+              <div className="font-mono text-xs mt-0.5" style={{ color: theme === "light" ? "#000" : "var(--accent-green)", fontSize: 10, fontWeight: 800 }}>
                 CYBER SECURE
               </div>
             </motion.div>
@@ -120,7 +120,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 <AnimatePresence>
                   {!collapsed && (
                     <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                      transition={{ duration: 0.1 }} className="font-medium">
+                      transition={{ duration: 0.1 }} className="font-bold tracking-tight">
                       {item.label}
                     </motion.span>
                   )}
@@ -143,10 +143,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             {!collapsed && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 className="flex-1 min-w-0">
-                <div className="text-xs font-semibold text-white truncate">
+                <div className="text-xs font-bold text-[var(--text-primary)] truncate">
                   {user.firstName} {user.lastName}
                 </div>
-                <div className="text-xs truncate" style={{ color: "var(--text-muted)" }}>
+                <div className="text-xs truncate font-semibold" style={{ color: "var(--text-muted)" }}>
                   {ROLE_LABELS[user.role]}
                 </div>
               </motion.div>
@@ -257,7 +257,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     style={{ background: "rgba(0,0,0,0.85)", border: "1px solid var(--surface-border)", backdropFilter: "blur(20px)" }}>
                     <div className="px-4 py-3 border-b flex items-center justify-between"
                       style={{ borderColor: "var(--surface-border)" }}>
-                      <span className="font-display font-semibold text-sm text-white">Notifications</span>
+                      <span className="font-display font-bold text-sm text-[var(--text-primary)]">Notifications</span>
                       <button onClick={() => setNotifications([])} className="text-xs" style={{ color: "var(--text-muted)" }}>
                         Clear all
                       </button>
