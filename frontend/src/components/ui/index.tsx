@@ -133,13 +133,14 @@ interface SectionHeaderProps {
   title: string;
   subtitle?: string;
   action?: ReactNode;
+  titleStyle?: React.CSSProperties;
 }
 
-export function SectionHeader({ title, subtitle, action }: SectionHeaderProps) {
+export function SectionHeader({ title, subtitle, action, titleStyle }: SectionHeaderProps) {
   return (
     <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "24px" }}>
       <div>
-        <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "22px", color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
+        <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "22px", color: "var(--text-primary)", letterSpacing: "-0.01em", ...titleStyle }}>
           {title}
         </h1>
         {subtitle && (

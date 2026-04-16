@@ -39,7 +39,8 @@ const seed = async () => {
   console.log("🏢 Tenant created");
 
   // --- Users ---
-  const hashedPw = await bcrypt.hash("Password123!", 12);
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD || "Password123!";
+  const hashedPw = await bcrypt.hash(adminPassword, 12);
   const [superAdmin, admin, analyst, executive, employee1, employee2] = await User.insertMany([
     { tenant_id: tenant._id, email: "ceo@yesyoucan.com", password: hashedPw, firstName: "Noah", lastName: "Darko-Adjei", role: "super_admin", department: "Executive" },
     { tenant_id: tenant._id, email: "strategy@yesyoucan.com", password: hashedPw, firstName: "Christiana", lastName: "Konlan Kennedy", role: "admin", department: "Strategy" },
@@ -213,13 +214,9 @@ const seed = async () => {
   console.log("\n✅ ============================================");
   console.log("   SEED COMPLETE — YesYouCan Cyber Secure");
   console.log("============================================");
-  console.log("\n📧 TEST ACCOUNTS:");
-  console.log("   ceo@yesyoucan.com         | Password123!");
-  console.log("   strategy@yesyoucan.com    | Password123!");
-  console.log("   grc@yesyoucan.com         | Password123!");
-  console.log("   exec@yesyoucan.com        | Password123!");
-  console.log("   eng@yesyoucan.com         | Password123!");
-  console.log("   ops@yesyoucan.com         | Password123!");
+  console.log("\n📧 TEST ACCOUNTS CREATED:");
+  console.log("   Initial users have been provisioned for the YesYouCan Cyber Secure tenant.");
+  console.log("   Check configuration for access credentials.");
   console.log("============================================\n");
 
   await mongoose.disconnect();
