@@ -50,15 +50,15 @@ html {
 
 /* --- LIGHT THEME (Softened Enterprise) --- */
 :root.light {
-  --surface-base:     #F8FAFC; /* Slate 50 refined */
-  --surface-1:        #FFFFFF; /* Pure White for elevated cards */
-  --surface-2:        #F1F5F9; /* Slate 100 */
-  --surface-border:   rgba(15, 23, 42, 0.12);
-  --surface-border-2: rgba(15, 23, 42, 0.2);
+  --surface-base:     #F1F5F9; /* Slate 100 - Muted background */
+  --surface-1:        #F8FAFC; /* Slate 50 - Surface elevation */
+  --surface-2:        #E2E8F0; /* Slate 200 - Nested depth */
+  --surface-border:   rgba(15, 23, 42, 0.14);
+  --surface-border-2: rgba(15, 23, 42, 0.22);
 
-  --text-primary:     #020617; /* Slate 950 - Ultra-crisp black text */
-  --text-secondary:   #1e293b; /* Slate 800 */
-  --text-muted:       #475569; /* Slate 600 - Better readable grey */
+  --text-primary:     #020617; /* Slate 950 - Deep ink black */
+  --text-secondary:   #1e293b; /* Slate 800 - Strong contrast */
+  --text-muted:       #334155; /* Slate 700 - Deepened grey */
 
   /* Backward compat */
   --navy-950:         var(--surface-base);
@@ -215,7 +215,7 @@ h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; line-h
 }
 
 :root.light .glass-surface {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.45);
 }
 
 :root.dark .glass-surface {

@@ -7,7 +7,7 @@ import {
   LayoutDashboard, AlertTriangle, ShieldCheck, Leaf, BarChart3,
   Truck, ClipboardList, Zap, Users, FileText, Settings,
   Bell, ChevronLeft, ChevronRight, Shield, LogOut, Menu, X,
-  Activity, Globe, Sun, Moon
+  Activity, Globe, Sun, Moon, CheckCircle
 } from "lucide-react";
 import useAuthStore from "../store/authStore";
 import useThemeStore from "../store/themeStore";
@@ -26,6 +26,7 @@ const NAV_ITEMS = [
   { label: "Incidents", href: "/incidents", icon: Zap },
   { label: "Employees", href: "/employees", icon: Users },
   { label: "Reports", href: "/reports", icon: FileText },
+  { label: "Authorization", href: "/admin/approvals", icon: CheckCircle, roles: ["super_admin"] },
   { label: "Admin", href: "/admin", icon: Settings, roles: ["super_admin", "admin"] },
 ];
 

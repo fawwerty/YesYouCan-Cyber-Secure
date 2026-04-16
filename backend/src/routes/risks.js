@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authenticate, authorize } = require("../middleware/auth");
 const Risk = require("../models/Risk");
+const { Approval } = require("../models");
 
 // GET /api/risks
 router.get("/", authenticate, async (req, res) => {
@@ -55,12 +56,33 @@ router.post("/", authenticate, authorize("super_admin", "admin", "analyst"), asy
 // PUT /api/risks/:id
 router.put("/:id", authenticate, authorize("super_admin", "admin", "analyst"), async (req, res) => {
   try {
+    const existingRisk = await Risk.findOne({ _id: req.params.id, tenant_id: req.tenantId, deleted_at: null });
+    if (!existingRisk) return res.status(404).json({ success: false, message: "Risk not found" });
+
+    // Sensitve Action: Status Change
+    if (req.body.status && req.body.status !== existingRisk.status && req.user.role !== "super_admin") {
+      await Approval.create({
+        tenant_id: req.tenantId,
+        requester: req.user._id,
+        actionType: "STATUS_CHANGE",
+        resourceType: "Risk",
+        resourceId: existingRisk._id,
+        originalData: { status: existingRisk.status },
+        requestedChanges: { status: req.body.status },
+      });
+      return res.json({ 
+        success: true, 
+        message: "Status change request submitted for Superadmin authorization.",
+        pendingApproval: true 
+      });
+    }
+
     const risk = await Risk.findOneAndUpdate(
       { _id: req.params.id, tenant_id: req.tenantId, deleted_at: null },
       { ...req.body, $push: { history: { changedBy: req.user._id, changes: req.body } } },
       { new: true, runValidators: true }
     ).populate("owner", "firstName lastName email");
-    if (!risk) return res.status(404).json({ success: false, message: "Risk not found" });
+    
     const io = req.app.get("io");
     io.to(`tenant:${req.tenantId}`).emit("risk:updated", { risk });
     res.json({ success: true, data: risk });
@@ -69,9 +91,29 @@ router.put("/:id", authenticate, authorize("super_admin", "admin", "analyst"), a
   }
 });
 
-// DELETE /api/risks/:id (soft delete)
+// DELETE /api/risks/:id
 router.delete("/:id", authenticate, authorize("super_admin", "admin"), async (req, res) => {
   try {
+    const existingRisk = await Risk.findOne({ _id: req.params.id, tenant_id: req.tenantId });
+    if (!existingRisk) return res.status(404).json({ success: false, message: "Risk not found" });
+
+    // Sensitive Action: Deletion
+    if (req.user.role !== "super_admin") {
+      await Approval.create({
+        tenant_id: req.tenantId,
+        requester: req.user._id,
+        actionType: "DELETE",
+        resourceType: "Risk",
+        resourceId: existingRisk._id,
+        originalData: existingRisk,
+      });
+      return res.json({ 
+        success: true, 
+        message: "Deletion request submitted for Superadmin authorization.",
+        pendingApproval: true 
+      });
+    }
+
     await Risk.findOneAndUpdate({ _id: req.params.id, tenant_id: req.tenantId }, { deleted_at: new Date() });
     res.json({ success: true, message: "Risk deleted" });
   } catch (err) {

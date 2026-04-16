@@ -29,6 +29,8 @@ const frameworkRoutes = require("./routes/frameworks");
 const policyRoutes = require("./routes/policies");
 const vendorRoutes = require("./routes/vendors");
 const notificationRoutes = require("./routes/notifications");
+const approvalRoutes = require("./routes/approvals");
+const commentRoutes = require("./routes/comments");
 
 const app = express();
 const server = http.createServer(app);
@@ -128,6 +130,8 @@ app.use("/api/frameworks", frameworkRoutes);
 app.use("/api/policies", policyRoutes);
 app.use("/api/vendors", vendorRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/approvals", approvalRoutes);
+app.use("/api/comments", commentRoutes);
 
 // Socket.IO events
 io.on("connection", (socket) => {

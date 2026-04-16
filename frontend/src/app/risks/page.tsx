@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, AlertTriangle, Filter, Search, X, ChevronRight } from "lucide-react";
 import api from "../../lib/api";
 import { SectionHeader, Badge, CardSkeleton, EmptyState } from "../../components/ui/index";
+import CommentSection from "../../components/ui/CommentSection";
 import { riskLevel, formatDate, STATUS_COLORS } from "../../lib/utils";
 import toast from "react-hot-toast";
 
@@ -104,6 +105,12 @@ function RiskModal({ risk, onClose, onSave }: { risk: any; onClose: () => void; 
             <textarea value={form.treatmentPlan} onChange={upd("treatmentPlan")}
               className="input-field min-h-[60px] resize-none" placeholder="Describe the mitigation plan..." />
           </div>
+
+          {/* Comments Section - Only show for existing risks */}
+          {risk && (
+            <CommentSection resourceType="Risk" resourceId={risk._id} />
+          )}
+
           <button type="submit" disabled={saving}
             className="w-full py-3 rounded-xl font-display font-semibold text-sm transition-all btn-vibrant"
             style={{ opacity: saving ? 0.6 : 1 }}>

@@ -90,8 +90,13 @@ const incidentSchema = new mongoose.Schema(
 );
 incidentSchema.index({ tenant_id: 1, createdAt: -1 });
 
+const Approval = require("./Approval");
+const Comment = require("./Comment");
+
 module.exports = {
   ESGMetric: mongoose.model("ESGMetric", esgMetricSchema),
   Supplier: mongoose.model("Supplier", supplierSchema),
   Incident: mongoose.model("Incident", incidentSchema),
+  Approval,
+  Comment,
 };
